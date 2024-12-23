@@ -375,11 +375,18 @@
         <div class="label">メニューをお選びください</div>
         <div class="info-text">※メニューを選択すると空き状況のカレンダーが表示されます</div>
         <div class="menu-sections">
-            <button type="button" onclick="showMenu('male')">まつ毛</button>
-            <button type="button" onclick="showMenu('female')">ネイル</button>
+            <button type="button" onclick="showMenu('eyelashes')">まつ毛</button>
+            <button type="button" onclick="showMenu('nail')">ネイル</button>
+            <button type="button" onclick="showMenu('FacialWAX')">フェイシャルWAX</button>
+            <button type="button" onclick="showMenu('napeWAX')">うなじWAX</button>
+            <button type="button" onclick="showMenu('EyelashExtensionsSingle')">まつ毛エクステシングル</button>
+            <button type="button" onclick="showMenu('EyelashExtensions3D')">まつ毛エクステ3D・フラットマットラッシュ</button>
+            <button type="button" onclick="showMenu('bindinglock')">バインドロック</button>
+            <button type="button" onclick="showMenu('Unlimitedlowerlashes')">下まつ毛つけ放題</button>
+            <button type="button" onclick="showMenu('rushlift')">ラッシュリフト（まつ毛パーマ）</button>
         </div>
 
-        <div id="male" class="menu-section">
+        <div id="eyelashes" class="menu-section">
             <div class="highlight-background">
                 <span class="highlight-text">◆まつ毛◆</span>
             </div>
@@ -390,7 +397,7 @@
             </div>
         </div>
 
-        <div id="female" class="menu-section">
+        <div id="nail" class="menu-section">
             <div class="highlight-background">
                 <span class="highlight-text">◆ネイル◆</span>
             </div>
@@ -405,6 +412,84 @@
                 <button type="button" onclick="selectSymptom(this)" data-price="15000">フットジェルネイルオフ有り</button>
                 <button type="button" onclick="selectSymptom(this)" data-price="15000">ジェルネイル当店オフのみ</button>
                 <button type="button" onclick="selectSymptom(this)" data-price="15000">ジェルネイル他店オフのみ</button>
+            </div>
+        </div>
+
+        <div id="FacialWAX" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆フェイシャルWAX◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">フェイシャルWAX＋VOSパック</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">メンズフェイシャルWAX</button>
+            </div>
+        </div>
+
+        <div id="napeWAX" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆うなじWAX◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">うなじWAX</button>
+            </div>
+        </div>
+
+        <div id="EyelashExtensionsSingle" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆まつ毛エクステシングル◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル60分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル90分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル120分つけ放題</button>
+            </div>
+        </div> 
+
+        <div id="EyelashExtensions3D" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆まつ毛エクステ3D・フラットマットラッシュ◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステ3D・フラットマットラッシュ<br>60分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステ3D・フラットマットラッシュ<br>90分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステ3D・フラットマットラッシュ<br>120分つけ放題</button>
+            </div>
+            <div class="highlight-background">
+                <span class="highlight-text">オプション</span>
+            </div>
+            <div class="irradiations">
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">4D</button>
+            </div>
+        </div>
+
+        <div id="bindinglock" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆バインドロック◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">バインドロック60分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">バインドロック90分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">バインドロック120分つけ放題</button>
+            </div>
+        </div>
+
+        <div id="Unlimitedlowerlashes" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆下まつ毛つけ放題◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">下まつ毛つけ放題</button>
+            </div>
+        </div>
+
+        <div id="rushlift" class="menu-section">
+            <div class="highlight-background">
+                <span class="highlight-text">◆ラッシュリフト（まつ毛パーマ）◆</span>
+            </div>
+            <div class="symptoms">
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">上のみ</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">下のみ</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">上下セット</button>
             </div>
         </div>
 
@@ -483,7 +568,7 @@
 
         // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
         let irradiationsTimes = {
-            '美白パック': 0
+            '4D': 0
         };
 
         let selectedirradiationsTime = 0; // 訪問回数で選択された時間
@@ -543,13 +628,7 @@
         <hr>
         <p>${selectedSymptomText}</p>
         <hr>
-        <p>${irradiationsText}</p>
-        <hr>
-        <p>${totalTimeText}</p>
-        <hr>
         <p>${selectedDateText}</p>
-        <hr>
-        <p>${totalAmountText}</p>
         <hr>
     `;
         }
