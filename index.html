@@ -377,13 +377,7 @@
         <div class="menu-sections">
             <button type="button" onclick="showMenu('eyelashes')">まつ毛</button>
             <button type="button" onclick="showMenu('nail')">ネイル</button>
-            <button type="button" onclick="showMenu('FacialWAX')">フェイシャルWAX</button>
-            <button type="button" onclick="showMenu('napeWAX')">うなじWAX</button>
-            <button type="button" onclick="showMenu('EyelashExtensionsSingle')">まつ毛エクステシングル</button>
-            <button type="button" onclick="showMenu('EyelashExtensions3D')">まつ毛エクステ3D・フラットマットラッシュ</button>
-            <button type="button" onclick="showMenu('bindinglock')">バインドロック</button>
-            <button type="button" onclick="showMenu('Unlimitedlowerlashes')">下まつ毛つけ放題</button>
-            <button type="button" onclick="showMenu('rushlift')">ラッシュリフト（まつ毛パーマ）</button>
+            <button type="button" onclick="showMenu('WAX')">WAX</button>
         </div>
 
         <div id="eyelashes" class="menu-section">
@@ -394,6 +388,19 @@
                 <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル60分つけ放題</button>
                 <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル90分つけ放題</button>
                 <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル120分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">フェイシャルWAX＋VOSパック</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">メンズフェイシャルWAX</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">うなじWAX</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル60分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル90分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル120分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステ3D・フラットマットラッシュ<br>60分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステ3D・フラットマットラッシュ<br>90分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステ3D・フラットマットラッシュ<br>120分つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">下まつ毛つけ放題</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">上のみ</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">下のみ</button>
+                <button type="button" onclick="selectSymptom(this)" data-price="15000">上下セット</button>
             </div>
         </div>
 
@@ -415,81 +422,15 @@
             </div>
         </div>
 
-        <div id="FacialWAX" class="menu-section">
+
+        <div id="WAX" class="menu-section">
             <div class="highlight-background">
-                <span class="highlight-text">◆フェイシャルWAX◆</span>
+                <span class="highlight-text">◆WAX◆</span>
             </div>
             <div class="symptoms">
                 <button type="button" onclick="selectSymptom(this)" data-price="15000">フェイシャルWAX＋VOSパック</button>
                 <button type="button" onclick="selectSymptom(this)" data-price="15000">メンズフェイシャルWAX</button>
-            </div>
-        </div>
-
-        <div id="napeWAX" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆うなじWAX◆</span>
-            </div>
-            <div class="symptoms">
                 <button type="button" onclick="selectSymptom(this)" data-price="15000">うなじWAX</button>
-            </div>
-        </div>
-
-        <div id="EyelashExtensionsSingle" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆まつ毛エクステシングル◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル60分つけ放題</button>
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル90分つけ放題</button>
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステシングル120分つけ放題</button>
-            </div>
-        </div> 
-
-        <div id="EyelashExtensions3D" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆まつ毛エクステ3D・フラットマットラッシュ◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステ3D・フラットマットラッシュ<br>60分つけ放題</button>
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステ3D・フラットマットラッシュ<br>90分つけ放題</button>
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">まつ毛エクステ3D・フラットマットラッシュ<br>120分つけ放題</button>
-            </div>
-            <div class="highlight-background">
-                <span class="highlight-text">オプション</span>
-            </div>
-            <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">4D</button>
-            </div>
-        </div>
-
-        <div id="bindinglock" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆バインドロック◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">バインドロック60分つけ放題</button>
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">バインドロック90分つけ放題</button>
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">バインドロック120分つけ放題</button>
-            </div>
-        </div>
-
-        <div id="Unlimitedlowerlashes" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆下まつ毛つけ放題◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">下まつ毛つけ放題</button>
-            </div>
-        </div>
-
-        <div id="rushlift" class="menu-section">
-            <div class="highlight-background">
-                <span class="highlight-text">◆ラッシュリフト（まつ毛パーマ）◆</span>
-            </div>
-            <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">上のみ</button>
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">下のみ</button>
-                <button type="button" onclick="selectSymptom(this)" data-price="15000">上下セット</button>
             </div>
         </div>
 
@@ -586,7 +527,23 @@
             'フットジェルネイルオフ無し': 105,
             'フットジェルネイルオフ有り': 165,
             'ジェルネイル当店オフのみ': 60,
-            'ジェルネイル他店オフのみ': 60
+            'ジェルネイル他店オフのみ': 60,
+            'フェイシャルWAX＋VOSパック': 60,
+            'メンズフェイシャルWAX': 60,
+            'うなじWAX': 60,
+            'まつ毛エクステシングル60分つけ放題': 60,
+            'まつ毛エクステシングル90分つけ放題': 60,
+            'まつ毛エクステシングル120分つけ放題': 60,
+            'まつ毛エクステ3D・フラットマットラッシュ60分つけ放題': 60,
+            'まつ毛エクステ3D・フラットマットラッシュ90分つけ放題': 60,
+            'まつ毛エクステ3D・フラットマットラッシュ120分つけ放題': 60,
+            'バインドロック60分つけ放題': 60,
+            'バインドロック90分つけ放題': 60,
+            'バインドロック120分つけ放題': 60,
+            '下まつ毛つけ放題': 60,
+            '上のみ': 60,
+            '上のみ': 60,
+            '上下セット': 60
         };
 
 
