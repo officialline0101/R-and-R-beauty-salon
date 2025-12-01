@@ -572,6 +572,12 @@
                 <button type="button" onclick="selectSymptom(this, 'treatment26')" data-price="11000">メンズフェイシャルWAX</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment27')" data-price="4950">うなじWAX</button>
             </div>
+            <div class="highlight-background">
+                <span class="highlight-text">キャンペーン</span>
+            </div>
+            <div class="irradiations">
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="1100">キャンペーンを利用する</button>
+            </div>
         </div>
 
         <div class="label">希望日時<br>（メニュー選択後に選択ください）</div>
@@ -649,7 +655,8 @@
 
         // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
         let irradiationsTimes = {
-            '4D': 0
+            '4D': 0,
+            'キャンペーンを利用する': 30
         };
 
         let selectedirradiationsTime = 0; // 訪問回数で選択された時間
