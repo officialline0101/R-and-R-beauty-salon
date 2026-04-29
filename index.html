@@ -9,26 +9,20 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            height: 100vh;
             margin: 0;
-            padding-top: 20px;
+            padding: 0;
             overflow-x: hidden;
             /* 横スクロールを防ぐ */
         }
 
         .container {
             background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 500px;
-            padding: 20px;
+            width: 100%;
+            max-width: 100%;
+            padding: 16px;
             box-sizing: border-box;
-            margin: 0 auto;
-            /* 中央に配置 */
+            margin: 0;
+            /* スマートフォン横幅いっぱいに表示 */
         }
 
         h1 {
@@ -417,7 +411,7 @@
         border-radius: 8px;
         border: 1px solid #e0e0e0;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        max-width: 350px;
+        max-width: 100%;
         margin: auto;
     }
     .treatment-image {
@@ -425,8 +419,8 @@
         margin-top: 15px;
         position: relative;
         width: 100%;
-        max-width: 300px;
-        height: 180px;
+        max-width: 100%;
+        height: 260px;
         border-radius: 8px;
         overflow: hidden;
         border: 1px solid #d4af37;
@@ -443,7 +437,7 @@
         font-size: 14px;
         line-height: 1.5;
         text-align: left;
-        max-width: 350px;
+        max-width: 100%;
         margin: 15px auto;
     }
     .treatment-price {
@@ -456,13 +450,30 @@
         font-weight: bold;
         font-size: 15px;
         text-align: right;
-        max-width: 350px;
+        max-width: 100%;
         margin: 15px auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0 10px;
     }
+    /* インラインでボタンの直下に挿入されるtreatmentエリア */
+    .inline-treatment-text {
+        display: block;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+    /* symptoms内のボタンを縦並び幅100%に */
+    .symptoms {
+        display: block !important;
+    }
+    .symptoms button {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
     .spinner-overlay {
         position: absolute;
         top: 50%;
@@ -497,6 +508,12 @@
             <button type="button" id="repeatVisit" onclick="selectVisit(this)">2回目以降</button>
         </div>
 
+        <!-- 5月キャンペーンクーポン -->
+        <div class="label">5月キャンペーンクーポンの利用</div>
+        <div class="visit-buttons">
+            <button type="button" id="couponBtn" onclick="selectCoupon(this)">5月クーポン利用する</button>
+        </div>
+
         <div class="label">メニューをお選びください</div>
         <div class="info-text">※メニューを選択すると<br>空き状況のカレンダーが表示されます</div>
         <div class="menu-sections">
@@ -506,7 +523,7 @@
             <button type="button" onclick="showMenu('WAX')">WAX</button>
         </div>
 
-        <div id="treatment-text" style="margin-bottom: 20px;"></div>
+        <!-- treatment-text は各メニューセクション内に移動 -->
 
         <div id="male" class="menu-section">
             <div class="highlight-background">
@@ -560,6 +577,7 @@
             </div>
             <div class="symptoms">
                 <button type="button" onclick="selectSymptom(this, 'treatment24')" data-price="4400">アイブロウWAX</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment28')" data-price="6000">アイブロウ ラミネーション</button>
             </div>
         </div>
 
@@ -689,16 +707,21 @@
             'バインドロック120分つけ放題': 120,
             '下まつ毛つけ放題': 45,
             'アイブロウWAX': 60,
+            'アイブロウ ラミネーション': 90,
             'ラッシュリフト（まつ毛パーマ）上のみ': 75,
             'ラッシュリフト（まつ毛パーマ）下のみ': 45,
             'ラッシュリフト（まつ毛パーマ）上下セット': 90
         };
 
-        let selectedMenuTime = 0;
+        let couponSelection = ''; // 5月クーポン選択状態
+        let selectedMenuTime = 0; // 選択されたメニューの所要時間
 
         function updateDisplayInfo() {
             const name = document.getElementById('name').value;
             const visitCountText = visitCount ? `・<span style="color:red;"><strong>ご来店回数</strong></span>：${visitCount}` : '・来店回数が未選択です';
+            const couponText = couponSelection
+                ? `・<span style="color:red;"><strong>クーポン</strong></span>：${couponSelection}`
+                : '・クーポン利用なし';
 
             // メニューが選択されていたら、各メニューを改行して表示
             const selectedSymptomText = selectedSymptom.length > 0
@@ -729,6 +752,8 @@
         <p>・<span style="color:red;"><strong>お名前</strong></span>：${name}</p>
         <hr>
         <p>${visitCountText}</p>
+        <hr>
+        <p>${couponText}</p>
         <hr>
         <p>${selectedSymptomText}</p>
         <hr>
@@ -816,8 +841,20 @@
             // カレンダーを更新するために取得する日付を渡す
             fetchAvailability(currentDate);
 
-            // トリートメントテキストを表示
-            const treatmentText = document.getElementById('treatment-text');
+            // 既存の全inline-treatment-textを削除
+            document.querySelectorAll('.inline-treatment-text').forEach(el => el.remove());
+
+            // ボタンが選択状態の場合のみ、直後にdivを挿入
+            if (!button.classList.contains('active')) {
+                // 選択解除時は何もしない
+                updateDisplayInfo();
+                return;
+            }
+
+            // ボタンの直後に挿入するtreatment divを作成
+            const treatmentText = document.createElement('div');
+            treatmentText.className = 'inline-treatment-text';
+            button.insertAdjacentElement('afterend', treatmentText);
 
             function createTreatmentContent(title, imageUrl, description, price, time) {
     return `
@@ -1029,9 +1066,17 @@ if (treatmentId === 'treatment1') {
     treatmentText.innerHTML = createTreatmentContent(
         'アイブロウWAX',
         'https://www.dropbox.com/scl/fi/twbc0brsr1f8mjmnlbu4d/WAX.png?rlkey=813yshivzhqzmevxa6i8190di&st=ujqxymbw&raw=1',
-        '',
+        '10日〜2週間前後は眉毛の自己処理はされずにご来店してください',
         '4,400円',
-        '45分'
+        '60分'
+    );
+} else if (treatmentId === 'treatment28') {
+    treatmentText.innerHTML = createTreatmentContent(
+        'アイブロウ ラミネーション',
+        'https://www.dropbox.com/scl/fi/z36j8pa5dfwpdnt7x54p7/.jpg?rlkey=45tp787e9hrk6049oqapdnmbe&st=chnfgaa5&raw=1',
+        '10日〜2週間前後は眉毛の自己処理はされずにご来店してください',
+        '6,000円',
+        '90分'
     );
 } else if (treatmentId === 'treatment25') {
     treatmentText.innerHTML = createTreatmentContent(
@@ -1058,7 +1103,7 @@ if (treatmentId === 'treatment1') {
         '60分'
     );
             } else {
-                treatmentText.innerHTML = '';
+                if (treatmentText) treatmentText.innerHTML = '';
             }
 
             // 選択されたメニューの名前と価格を取得
@@ -1128,6 +1173,18 @@ if (treatmentId === 'treatment1') {
 
             // カレンダーを更新するために取得する日付を渡す
             fetchAvailability(currentDate);
+        }
+
+        function selectCoupon(element) {
+            // クーポンボタンのトグル
+            if (element.classList.contains('active')) {
+                element.classList.remove('active');
+                couponSelection = '';
+            } else {
+                element.classList.add('active');
+                couponSelection = '5月クーポン利用する';
+            }
+            updateDisplayInfo();
         }
 
         function showMenu(menu) {
@@ -1212,7 +1269,7 @@ if (treatmentId === 'treatment1') {
             // LINEトークにメッセージを送信
             liff.sendMessages([{
                 type: 'text',
-                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\nメニュー：${formData.selectedSymptom},${formData.irradiationsCount}\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
+                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\n5月クーポン：${couponSelection || 'なし'}\nメニュー：${formData.selectedSymptom},${formData.irradiationsCount}\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
             }]).then(() => {
                 /* メッセージ送信成功時の処理 */
                 alert('当日キャンセルは無いようにお願いいたします。');
