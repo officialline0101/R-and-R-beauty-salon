@@ -660,6 +660,27 @@
                 console.log('LIFF初期化失敗', err);
             });
 
+            // localStorageからお客様名と電話番号を復元
+            const savedName = localStorage.getItem('randr_customer_name');
+            const savedPhone = localStorage.getItem('randr_customer_phone');
+            if (savedName) {
+                document.getElementById('name').value = savedName;
+                updateDisplayInfo();
+            }
+            if (savedPhone) {
+                document.getElementById('phone').value = savedPhone;
+            }
+
+            // お客様名の入力をlocalStorageに保存
+            document.getElementById('name').addEventListener('input', function () {
+                localStorage.setItem('randr_customer_name', this.value);
+            });
+
+            // 電話番号の入力をlocalStorageに保存
+            document.getElementById('phone').addEventListener('input', function () {
+                localStorage.setItem('randr_customer_phone', this.value);
+            });
+
             fetchAvailability(currentDate);
         });
 
