@@ -508,10 +508,10 @@
             <button type="button" id="repeatVisit" onclick="selectVisit(this)">2回目以降</button>
         </div>
 
-        <!-- 5月キャンペーンクーポン -->
-        <div class="label">5月キャンペーンクーポンの利用</div>
+        <!-- 6月キャンペーンクーポン -->
+        <div class="label">6月キャンペーンクーポンの利用</div>
         <div class="visit-buttons">
-            <button type="button" id="couponBtn" onclick="selectCoupon(this)">5月クーポン利用する</button>
+            <button type="button" id="couponBtn" onclick="selectCoupon(this)">6月クーポン利用する</button>
         </div>
 
         <div class="label">メニューをお選びください</div>
@@ -577,7 +577,8 @@
             </div>
             <div class="symptoms">
                 <button type="button" onclick="selectSymptom(this, 'treatment24')" data-price="4400">アイブロウWAX</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment28')" data-price="6000">アイブロウ ラミネーション</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment28')" data-price="3300">次世代眉パーマ/パリジャンブロウ</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment29')" data-price="5500">眉毛WAX＋眉毛パーマ</button>
             </div>
         </div>
 
@@ -728,13 +729,14 @@
             'バインドロック120分つけ放題': 120,
             '下まつ毛つけ放題': 45,
             'アイブロウWAX': 60,
-            'アイブロウ ラミネーション': 90,
+            '次世代眉パーマ/パリジャンブロウ': 30,
+            '眉毛WAX＋眉毛パーマ': 90,
             'ラッシュリフト（まつ毛パーマ）上のみ': 75,
             'ラッシュリフト（まつ毛パーマ）下のみ': 45,
             'ラッシュリフト（まつ毛パーマ）上下セット': 90
         };
 
-        let couponSelection = ''; // 5月クーポン選択状態
+        let couponSelection = ''; // 6月クーポン選択状態
         let selectedMenuTime = 0; // 選択されたメニューの所要時間
 
         function updateDisplayInfo() {
@@ -1093,10 +1095,18 @@ if (treatmentId === 'treatment1') {
     );
 } else if (treatmentId === 'treatment28') {
     treatmentText.innerHTML = createTreatmentContent(
-        'アイブロウ ラミネーション',
-        'https://www.dropbox.com/scl/fi/z36j8pa5dfwpdnt7x54p7/.jpg?rlkey=45tp787e9hrk6049oqapdnmbe&st=chnfgaa5&raw=1',
-        '10日〜2週間前後は眉毛の自己処理はされずにご来店してください',
-        '6,000円',
+        '次世代眉パーマ/パリジャンブロウ',
+        'https://www.dropbox.com/scl/fi/ppyykxf66l6xlmgcyv309/.jpg?rlkey=8cccr3rdfo8ct81txeco1sinj&st=mwb0j8ef&raw=1',
+        `『眉毛に薬剤をあてて、毛流れを変えてあげる』\u3000眉毛パーマです！！<br>毛流れが整うことで、目元がリフトアップ。<br>お顔の印象が生き生きとします！<br>従来の眉パーマのような、ぺたっと張り付く仕上がりとは異なり、<br>ふんわり自然に毛流れを整えます。<br><br>このような方におすすめ<br>◾️ 眉に左右差があり、手入れや眉メイクが難しい<br>◾️ 毛流れが不規則で手入れが上手くできない<br>◾️ 生え癖がある<br>◾️ 顔の印象が薄く見られる<br>◾️ 眉に立体感が欲しい<br>◾️ 自眉毛がしっかりあるので、形の変えようがない`,
+        '3,300円',
+        '30分'
+    );
+} else if (treatmentId === 'treatment29') {
+    treatmentText.innerHTML = createTreatmentContent(
+        '眉毛WAX＋眉毛パーマ',
+        'https://www.dropbox.com/scl/fi/v0otfztvwoyrm4z2cfp1j/WAX.png?rlkey=4d1zzrptkz75j98dzfcekmdzy&st=ekmnqkk0&raw=1',
+        'アイブロウWAX✖️パリジャンブロウ<br>のお得なセットメニュー✨<br>幅広いお客様の理想の眉を叶えるコース',
+        '5,500円',
         '90分'
     );
 } else if (treatmentId === 'treatment25') {
@@ -1203,7 +1213,7 @@ if (treatmentId === 'treatment1') {
                 couponSelection = '';
             } else {
                 element.classList.add('active');
-                couponSelection = '5月クーポン利用する';
+                couponSelection = '6月クーポン利用する';
             }
             updateDisplayInfo();
         }
@@ -1290,7 +1300,7 @@ if (treatmentId === 'treatment1') {
             // LINEトークにメッセージを送信
             liff.sendMessages([{
                 type: 'text',
-                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\n5月クーポン：${couponSelection || 'なし'}\nメニュー：${formData.selectedSymptom},${formData.irradiationsCount}\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
+                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\n6月クーポン：${couponSelection || 'なし'}\nメニュー：${formData.selectedSymptom},${formData.irradiationsCount}\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
             }]).then(() => {
                 /* メッセージ送信成功時の処理 */
                 alert('当日キャンセルは無いようにお願いいたします。');
