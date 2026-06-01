@@ -646,6 +646,30 @@
         let menuPrice = 0; // メニューの価格
         let optionsPrice = 0; // オプションの合計価格
 
+        // 施術詳細カードのHTMLを生成するグローバル関数（selectCouponからも参照できるよう外に定義）
+        function createTreatmentContent(title, imageUrl, description, price, time) {
+            return `
+                <div class="treatment-container">
+                    <div style="font-size: 18px; font-weight: bold;">${title}</div>
+                </div>
+
+                <div class="treatment-image">
+                    <div class="spinner-overlay">
+                        <div class="spinner"></div>
+                    </div>
+                    <img src="${imageUrl}" alt="${title}" style="width: 100%; height: 100%; display: none;"
+                         onload="this.style.display='block'; this.previousElementSibling.style.display='none';">
+                </div>
+
+                <div class="treatment-description">${description}</div>
+
+                <div class="treatment-price">
+                    <span>価格：</span><span>${price}</span><br>
+                    <span>所要時間：</span><span>${time}</span>
+                </div>`;
+        }
+
+
         document.addEventListener('DOMContentLoaded', function () {
             liff.init({
                 liffId: '1661141527-PzvKxkRm'
@@ -838,6 +862,7 @@
                 // すべてのボタンの選択が解除された場合、メニュー時間を0にリセット
                 selectedMenuTime = 0;
                 selectedSymptom = null; // 選択されたメニューをリセット
+
                 menuPrice = 0; // メニュー価格をリセット
             } else {
                 // 1つだけ選択状態にする
@@ -872,28 +897,6 @@
             const treatmentText = document.createElement('div');
             treatmentText.className = 'inline-treatment-text';
             button.insertAdjacentElement('afterend', treatmentText);
-
-            function createTreatmentContent(title, imageUrl, description, price, time) {
-    return `
-        <div class="treatment-container">
-            <div style="font-size: 18px; font-weight: bold;">${title}</div>
-        </div>
-
-        <div class="treatment-image">
-            <div class="spinner-overlay">
-                <div class="spinner"></div>
-            </div>
-            <img src="${imageUrl}" alt="${title}" style="width: 100%; height: 100%; display: none;" 
-                 onload="this.style.display='block'; this.previousElementSibling.style.display='none';">
-        </div>
-
-        <div class="treatment-description">${description}</div>
-
-        <div class="treatment-price">
-            <span>価格：</span><span>${price}</span><br>
-            <span>所要時間：</span><span>${time}</span>
-        </div>`;
-}
 
 if (treatmentId === 'treatment1') {
     treatmentText.innerHTML = createTreatmentContent(
