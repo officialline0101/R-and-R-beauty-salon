@@ -591,12 +591,6 @@
                 <button type="button" onclick="selectSymptom(this, 'treatment26')" data-price="11000">メンズフェイシャルWAX</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment27')" data-price="4950">うなじWAX</button>
             </div>
-            <div class="highlight-background">
-                <span class="highlight-text">キャンペーン</span>
-            </div>
-            <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="1100">キャンペーンを利用する</button>
-            </div>
         </div>
 
         <div class="label">希望日時<br>（メニュー選択後に選択ください）</div>
@@ -1102,11 +1096,13 @@ if (treatmentId === 'treatment1') {
         '30分'
     );
 } else if (treatmentId === 'treatment29') {
+    // クーポン選択状態によって価格を切り替える
+    const treatment29Price = couponSelection ? 'キャンペーン料金：5,000円' : '5,500円';
     treatmentText.innerHTML = createTreatmentContent(
         '眉毛WAX＋眉毛パーマ',
         'https://www.dropbox.com/scl/fi/v0otfztvwoyrm4z2cfp1j/WAX.png?rlkey=4d1zzrptkz75j98dzfcekmdzy&st=ekmnqkk0&raw=1',
         'アイブロウWAX✖️パリジャンブロウ<br>のお得なセットメニュー✨<br>幅広いお客様の理想の眉を叶えるコース',
-        '5,500円',
+        treatment29Price,
         '90分'
     );
 } else if (treatmentId === 'treatment25') {
@@ -1215,6 +1211,24 @@ if (treatmentId === 'treatment1') {
                 element.classList.add('active');
                 couponSelection = '6月クーポン利用する';
             }
+
+            // 眉毛WAX＋眉毛パーマ（treatment29）が選択済みの場合、詳細表示の価格を更新する
+            const activeTreatment29 = document.querySelector('#whitening .symptoms button[onclick*="treatment29"].active');
+            if (activeTreatment29) {
+                const existingTreatmentText = activeTreatment29.nextElementSibling;
+                if (existingTreatmentText && existingTreatmentText.classList.contains('inline-treatment-text')) {
+                    const newPrice = couponSelection ? 'キャンペーン料金：5,000円' : '5,500円';
+                    // createTreatmentContentを再呼び出しして価格を更新
+                    existingTreatmentText.innerHTML = createTreatmentContent(
+                        '眉毛WAX＋眉毛パーマ',
+                        'https://www.dropbox.com/scl/fi/v0otfztvwoyrm4z2cfp1j/WAX.png?rlkey=4d1zzrptkz75j98dzfcekmdzy&st=ekmnqkk0&raw=1',
+                        'アイブロウWAX✖️パリジャンブロウ<br>のお得なセットメニュー✨<br>幅広いお客様の理想の眉を叶えるコース',
+                        newPrice,
+                        '90分'
+                    );
+                }
+            }
+
             updateDisplayInfo();
         }
 
