@@ -6,55 +6,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>予約フォーム</title>
     <style>
+        /* ===== R and R beauty salon デザイン一新（空と雲×青×星） ===== */
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f7f7f7;
+            font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", Arial, sans-serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            /* 横スクロールを防ぐ */
+            color: #1c3d66;
+            background:
+                radial-gradient(ellipse 90% 40% at 15% 6%, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 60%),
+                radial-gradient(ellipse 70% 30% at 85% 16%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 60%),
+                linear-gradient(180deg, #a7d4f2 0%, #bfe1f7 30%, #d8edfb 70%, #e8f5fd 100%);
+            background-attachment: fixed;
         }
 
         .container {
-            background-color: #fff;
-            width: 100%;
-            max-width: 100%;
-            padding: 16px;
+            background-color: rgba(255, 255, 255, 0.96);
+            width: auto;
+            max-width: 560px;
+            padding: 0 14px 26px;
             box-sizing: border-box;
-            margin: 0;
-            /* スマートフォン横幅いっぱいに表示 */
+            margin: 10px auto 24px;
+            border-radius: 22px;
+            box-shadow: 0 10px 34px rgba(28, 92, 160, 0.18);
+            overflow: hidden;
+        }
+
+        /* ===== ヘッダー（モックから切り出した空と雲＋ロゴバッジ画像） ===== */
+        .sky-header {
+            margin: 0 -14px 18px;
+            padding: 0 16px 0;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(180deg, #cde4f7 0%, #ddeffb 100%);
+            border-bottom: 1px solid #cfe6f8;
+        }
+
+        .header-visual {
+            display: block;
+            width: calc(100% + 32px);
+            margin: 0 -16px 0;
+            max-width: none;
         }
 
         h1 {
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 24px;
+            margin: 0;
+            font-family: Georgia, "Yu Mincho", "Hiragino Mincho ProN", serif;
+            font-size: 23px;
+            color: #17417e;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
         }
 
+        h1 .spark {
+            color: #f5c518;
+            font-size: 16px;
+            margin: 0 6px;
+        }
+
+        /* ===== セクション見出し ===== */
         .label {
-            display: block;
-            margin-bottom: 10px;
-            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 26px 0 10px;
+            padding: 0;
             font-weight: bold;
-            background-color: #f7c11e;
-            color: white;
-            border-radius: 4px;
-            text-align: center;
+            font-size: 15.5px;
+            background: none;
+            color: #1c3d66;
+            border-radius: 0;
+            text-align: left;
+        }
+
+        .label::before {
+            content: "✦";
+            color: #2f6fd0;
+            font-size: 14px;
+        }
+
+        .badge-req,
+        .badge-opt {
+            font-size: 10.5px;
+            font-weight: bold;
+            padding: 2px 9px;
+            border-radius: 5px;
+            letter-spacing: 1px;
+        }
+
+        .badge-req {
+            color: #2f6fd0;
+            background: #eaf3ff;
+            border: 1px solid #9dc3f0;
+        }
+
+        .badge-opt {
+            color: #7a8da5;
+            background: #f2f5f9;
+            border: 1px solid #c9d6e6;
+        }
+
+        .field-note {
+            font-size: 11.5px;
+            color: #7d97b4;
+            margin: -12px 0 18px 4px;
         }
 
         input[type="text"],
         input[type="tel"],
         textarea {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 13px 14px;
+            margin-bottom: 18px;
+            border: 1.5px solid #c3ddf2;
+            border-radius: 12px;
             box-sizing: border-box;
+            font-size: 15px;
+            color: #1c3d66;
+            background: #fdfefe;
+            outline: none;
         }
 
+        input[type="text"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus {
+            border-color: #2f6fd0;
+            box-shadow: 0 0 0 3px rgba(47, 111, 208, 0.12);
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #a8bed4;
+        }
+
+        /* ===== 選択ボタン共通 ===== */
         .visit-buttons,
-        .symptoms,
         .menu-sections,
         .irradiations {
             display: flex;
@@ -64,71 +156,536 @@
         }
 
         .visit-buttons button,
-        .symptoms button,
-        .menu-sections button,
         .irradiations button {
             flex: 1;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #f7f7f7;
+            padding: 14px 10px;
+            border: 1.5px solid #9dc3f0;
+            border-radius: 12px;
+            background-color: #fff;
+            color: #23477e;
+            font-size: 14.5px;
+            font-weight: bold;
             cursor: pointer;
             box-sizing: border-box;
             text-align: center;
             white-space: nowrap;
+            transition: all 0.15s ease;
         }
 
         .visit-buttons button.active,
-        .symptoms button.active,
-        .menu-sections button.active,
         .irradiations button.active {
-            background-color: #444;
+            background: linear-gradient(135deg, #3d7fd9, #1e5cb0);
             color: #fff;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(30, 92, 176, 0.35);
         }
 
-        .date-inputs input[type="datetime-local"] {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+        /* ===== メニューカテゴリ（4ボタン） ===== */
+        .menu-sections {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
         }
 
-        .submit-button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 4px;
-            background-color: #f7c11e;
-            color: #fff;
-            font-size: 18px;
+        .menu-sections button {
+            min-width: 0;
+            overflow: hidden;
+            padding: 14px 2px 11px;
+            border: 1.5px solid #c3ddf2;
+            border-radius: 14px;
+            background-color: #fff;
+            color: #4a6d96;
+            font-size: 13px;
+            font-weight: bold;
             cursor: pointer;
+            box-sizing: border-box;
+            text-align: center;
+            white-space: nowrap;
+            transition: all 0.15s ease;
         }
 
+        .menu-sections button::before {
+            content: "";
+            display: block;
+            width: 26px;
+            height: 26px;
+            margin: 0 auto 5px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .menu-sections button:nth-child(1)::before {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M6 17.5C10.2 22.2 21.8 22.2 26 17.5" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.2 18.9L7.6 22" stroke="%232b73c9" stroke-width="1.6" stroke-linecap="round"/><path d="M12.6 20.4L11.8 24" stroke="%232b73c9" stroke-width="1.6" stroke-linecap="round"/><path d="M16 20.9V24.8" stroke="%232b73c9" stroke-width="1.6" stroke-linecap="round"/><path d="M19.4 20.4L20.2 24" stroke="%232b73c9" stroke-width="1.6" stroke-linecap="round"/><path d="M22.8 18.9L24.4 22" stroke="%232b73c9" stroke-width="1.6" stroke-linecap="round"/></svg>');
+        }
+
+        .menu-sections button:nth-child(2)::before {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M13 13.5V7.8C13 5.7 14.3 4.3 16 4.3C17.7 4.3 19 5.7 19 7.8V13.5" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M11.2 13.2C11.2 11.8 12.3 10.7 13.7 10.7H18.3C19.7 10.7 20.8 11.8 20.8 13.2V22.5C20.8 25.3 18.7 27.5 16 27.5C13.3 27.5 11.2 25.3 11.2 22.5V13.2Z" stroke="%232b73c9" stroke-width="1.8" stroke-linejoin="round"/><path d="M14.2 11.2V8.2C14.2 7 14.9 6.2 16 6.2C17.1 6.2 17.8 7 17.8 8.2V11.2" stroke="%232b73c9" stroke-width="1.3" stroke-linecap="round"/><path d="M22.7 8.2C24.2 9.2 24.6 11.1 23.8 12.7" stroke="%232b73c9" stroke-width="1.5" stroke-linecap="round"/><path d="M24.8 5.4L25.8 4.3" stroke="%232b73c9" stroke-width="1.4" stroke-linecap="round"/></svg>');
+        }
+
+        .menu-sections button:nth-child(3)::before {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M5.8 18.4C10.3 13.7 18.1 11.6 26.2 14.3" stroke="%232b73c9" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.8 17.3C12.4 15.2 18.3 14.2 24.1 15.2" stroke="%232b73c9" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+        }
+
+        .menu-sections button:nth-child(4)::before {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M12 5.5L13.9 11.1L19.5 13L13.9 14.9L12 20.5L10.1 14.9L4.5 13L10.1 11.1L12 5.5Z" stroke="%232b73c9" stroke-width="1.7" stroke-linejoin="round"/><path d="M23.5 16.5L24.8 20.2L28.5 21.5L24.8 22.8L23.5 26.5L22.2 22.8L18.5 21.5L22.2 20.2L23.5 16.5Z" stroke="%232b73c9" stroke-width="1.6" stroke-linejoin="round"/></svg>');
+        }
+
+        /* ===== 確認欄・キャンペーンの装飾アイコン ===== */
+        .sum-ic {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            vertical-align: -4px;
+            margin-right: 8px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        .sum-ic-user { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M16 15.2C18.6 15.2 20.7 13.1 20.7 10.5C20.7 7.9 18.6 5.8 16 5.8C13.4 5.8 11.3 7.9 11.3 10.5C11.3 13.1 13.4 15.2 16 15.2Z" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M7.2 26.2C8.2 21.8 11.6 18.9 16 18.9C20.4 18.9 23.8 21.8 24.8 26.2" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'); }
+
+        .sum-ic-phone { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M11.1 6.6L13.7 11.1C14.2 12 14 13.1 13.2 13.8L11.7 15.1C13.2 18 15.6 20.4 18.5 21.9L19.8 20.4C20.5 19.6 21.6 19.4 22.5 19.9L27 22.5C27.9 23 28.3 24.1 27.9 25L27.1 27.1C26.7 28.1 25.7 28.7 24.7 28.5C13.7 26.8 5.2 18.3 3.5 7.3C3.3 6.3 3.9 5.3 4.9 4.9L7 4.1C7.9 3.7 9.1 4.1 9.6 5L11.1 6.6Z" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'); }
+
+        .sum-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e4eef8;
+            font-size: 13px;
+        }
+
+        .sum-row:last-child {
+            border-bottom: none;
+        }
+
+        .sum-row .sum-ic {
+            flex: none;
+            margin-top: -1px;
+        }
+
+        .sum-label {
+            color: #35618f;
+            font-weight: bold;
+            width: 84px;
+            flex: none;
+        }
+
+        .sum-val {
+            flex: 1;
+            text-align: right;
+            font-weight: bold;
+            color: #1c3d66;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+
+        .sum-empty {
+            color: #a8bed4;
+            font-weight: normal;
+        }
+
+        .sum-ic-heart { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M16 27C15.4 26.4 6.2 18.8 6.2 11.9C6.2 8.5 8.7 6 12 6C13.9 6 15.1 6.9 16 8.2C16.9 6.9 18.1 6 20 6C23.3 6 25.8 8.5 25.8 11.9C25.8 18.8 16.6 26.4 16 27Z" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'); }
+
+        .sum-ic-spark { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M12 5.5L13.9 11.1L19.5 13L13.9 14.9L12 20.5L10.1 14.9L4.5 13L10.1 11.1L12 5.5Z" stroke="%232b73c9" stroke-width="1.7" stroke-linejoin="round"/><path d="M23.5 16.5L24.8 20.2L28.5 21.5L24.8 22.8L23.5 26.5L22.2 22.8L18.5 21.5L22.2 20.2L23.5 16.5Z" stroke="%232b73c9" stroke-width="1.6" stroke-linejoin="round"/></svg>'); }
+
+        .sum-ic-lash { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M6 17.5C10.2 22.2 21.8 22.2 26 17.5" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.2 18.9L7.6 22" stroke="%232b73c9" stroke-width="1.6" stroke-linecap="round"/><path d="M12.6 20.4L11.8 24" stroke="%232b73c9" stroke-width="1.6" stroke-linecap="round"/><path d="M16 20.9V24.8" stroke="%232b73c9" stroke-width="1.6" stroke-linecap="round"/><path d="M19.4 20.4L20.2 24" stroke="%232b73c9" stroke-width="1.6" stroke-linecap="round"/><path d="M22.8 18.9L24.4 22" stroke="%232b73c9" stroke-width="1.6" stroke-linecap="round"/></svg>'); }
+
+        .sum-ic-plus { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="%232b73c9" stroke-width="1.8"/><path d="M16 11V21" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round"/><path d="M11 16H21" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round"/></svg>'); }
+
+        .sum-ic-clock { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="%232b73c9" stroke-width="1.8"/><path d="M16 9.5V16L20.5 18.5" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>'); }
+
+        .sum-ic-cal { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><path d="M7.2 8.2H24.8C26.2 8.2 27.3 9.3 27.3 10.7V25.2C27.3 26.6 26.2 27.7 24.8 27.7H7.2C5.8 27.7 4.7 26.6 4.7 25.2V10.7C4.7 9.3 5.8 8.2 7.2 8.2Z" stroke="%232b73c9" stroke-width="1.8" stroke-linejoin="round"/><path d="M4.7 13.7H27.3" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round"/><path d="M10.2 5V10.3" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round"/><path d="M21.8 5V10.3" stroke="%232b73c9" stroke-width="1.8" stroke-linecap="round"/><path d="M10.5 18H11.8" stroke="%232b73c9" stroke-width="1.7" stroke-linecap="round"/><path d="M15.4 18H16.6" stroke="%232b73c9" stroke-width="1.7" stroke-linecap="round"/><path d="M20.2 18H21.5" stroke="%232b73c9" stroke-width="1.7" stroke-linecap="round"/><path d="M10.5 22.5H11.8" stroke="%232b73c9" stroke-width="1.7" stroke-linecap="round"/><path d="M15.4 22.5H16.6" stroke="%232b73c9" stroke-width="1.7" stroke-linecap="round"/></svg>'); }
+
+        .sum-ic-yen { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="11" stroke="%232b73c9" stroke-width="1.8"/><path d="M12 10L16 16L20 10" stroke="%232b73c9" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 16V23" stroke="%232b73c9" stroke-width="1.7" stroke-linecap="round"/><path d="M12.5 17.5H19.5" stroke="%232b73c9" stroke-width="1.7" stroke-linecap="round"/><path d="M12.5 20.5H19.5" stroke="%232b73c9" stroke-width="1.7" stroke-linecap="round"/></svg>'); }
+
+        .flourish {
+            display: inline-block;
+            width: 50px;
+            height: 13px;
+            margin: 0 3px;
+            vertical-align: middle;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 20" fill="none"><path d="M60 10H73" stroke="%23c9a44a" stroke-width="1.4" stroke-linecap="round"/><path d="M47 10H60" stroke="%23c9a44a" stroke-width="1.4" stroke-linecap="round"/><path d="M73 10C82 10 82 3.8 75.5 4.8C68.5 5.9 69.2 15.2 82.5 15.2C93.5 15.2 97.5 8.5 105.5 8.5" stroke="%23c9a44a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M47 10C38 10 38 3.8 44.5 4.8C51.5 5.9 50.8 15.2 37.5 15.2C26.5 15.2 22.5 8.5 14.5 8.5" stroke="%23c9a44a" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M105.5 8.5C111 8.5 112.5 5.5 115 3.8" stroke="%23c9a44a" stroke-width="1.2" stroke-linecap="round"/><path d="M14.5 8.5C9 8.5 7.5 5.5 5 3.8" stroke="%23c9a44a" stroke-width="1.2" stroke-linecap="round"/></svg>');
+        }
+
+        .menu-sections button.active {
+            border: 2px solid #2f6fd0;
+            color: #1e5cb0;
+            background: #eef6ff;
+            box-shadow: 0 4px 12px rgba(30, 92, 176, 0.18);
+        }
+
+        /* ===== メニュー（縦並びボタン） ===== */
+        .symptoms {
+            display: block !important;
+            margin-bottom: 20px;
+        }
+
+        .symptoms button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 10px;
+            border: 1.5px solid #d5e6f5;
+            border-radius: 12px;
+            background-color: #fff;
+            color: #1c3d66;
+            font-size: 13.5px;
+            font-weight: bold;
+            cursor: pointer;
+            box-sizing: border-box;
+            text-align: left;
+            white-space: normal;
+            line-height: 1.45;
+            box-shadow: 0 1px 4px rgba(28, 92, 160, 0.06);
+            transition: all 0.15s ease;
+        }
+
+        .symptoms button .m-name {
+            flex: 1;
+        }
+
+        .symptoms button .m-price {
+            color: #1e5cb0;
+            font-weight: bold;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .symptoms button .m-price .chev {
+            font-style: normal;
+            color: #9dc3f0;
+            margin-left: 6px;
+            font-size: 16px;
+        }
+
+        .symptoms button.active {
+            background: #e5f1ff;
+            color: #1c3d66;
+            border: 2px solid #2f6fd0;
+            box-shadow: 0 0 0 3px rgba(47, 111, 208, 0.12);
+        }
+
+        .symptoms button.active .m-name::before {
+            content: "✔";
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            background: #2f6fd0;
+            color: #fff;
+            border-radius: 50%;
+            font-size: 11px;
+            margin-right: 8px;
+        }
+
+        /* オプションボタン */
+        .irradiations button {
+            flex: none;
+            width: 100%;
+        }
+
+        .options button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 1.5px solid #c3ddf2;
+            border-radius: 12px;
+            background-color: #fff;
+            cursor: pointer;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .options button.active {
+            background: linear-gradient(135deg, #3d7fd9, #1e5cb0);
+            color: #fff;
+            border-color: transparent;
+        }
+
+        /* ===== カテゴリ内見出し ===== */
+        .menu-section {
+            display: none;
+        }
+
+        .menu-section.active {
+            display: block;
+        }
+
+        .highlight-background {
+            cursor: default;
+            background: linear-gradient(135deg, #eef6ff, #dcebfb);
+            padding: 11px 10px;
+            border: 1px solid #c3ddf2;
+            border-radius: 10px;
+            font-size: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-bottom: 12px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .highlight-text {
+            font-weight: bold;
+            display: inline-block;
+            color: #1e5cb0;
+            text-align: center;
+        }
+
+        /* ===== 案内テキスト ===== */
+        .info-text {
+            margin-top: 2px;
+            margin-bottom: 12px;
+            font-size: 11.5px;
+            color: #7d97b4;
+            line-height: 1.7;
+            text-align: center;
+            word-wrap: break-word;
+            background-color: transparent;
+            border: none;
+            padding: 0 4px;
+            border-radius: 0;
+        }
+
+        @media (max-width: 768px) {
+            .info-text {
+                font-size: 11.5px;
+                margin-top: 4px;
+                line-height: 1.8;
+            }
+        }
+
+        /* ===== 夏割キャンペーン ===== */
+        .summer-campaign {
+            position: relative;
+            margin: 22px 0 26px;
+            padding: 20px 12px 16px;
+            border-radius: 16px;
+            border: 1.5px solid #bcd8f2;
+            background:
+                radial-gradient(ellipse 55% 45% at 85% 12%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 60%),
+                linear-gradient(180deg, #e9f4fd 0%, #f6fbff 100%);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .summer-campaign-badge {
+            display: inline-block;
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 1;
+            background: linear-gradient(135deg, #2a5da8, #17417e);
+            color: #fff;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 8px 10px;
+            border-radius: 50%;
+            line-height: 1.35;
+            box-shadow: 0 3px 8px rgba(23, 65, 126, 0.35);
+        }
+
+        .summer-campaign-title {
+            position: relative;
+            z-index: 1;
+            color: #17417e;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.5;
+            margin-top: 2px;
+        }
+
+        .summer-campaign-title-main {
+            display: inline-block;
+            margin-top: 4px;
+            font-size: 21px;
+            letter-spacing: 1px;
+        }
+
+        .summer-campaign-note {
+            position: relative;
+            z-index: 1;
+            margin-top: 10px;
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px dashed #9dc3f0;
+            color: #2f6fd0;
+            font-size: 12px;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .summer-menus {
+            position: relative;
+            z-index: 1;
+            margin-top: 14px;
+        }
+
+        .summer-menus button {
+            display: block;
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            padding: 13px 14px;
+            border: 1.5px solid #d5e6f5;
+            border-radius: 12px;
+            background: #fff;
+            text-align: left;
+            white-space: normal;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(28, 92, 160, 0.08);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .summer-menus button:last-child {
+            margin-bottom: 0;
+        }
+
+        .summer-menus button:active {
+            transform: scale(0.98);
+        }
+
+        .summer-menus button.active {
+            background: #eef6ff;
+            color: inherit;
+            border: 2px solid #2f6fd0;
+            box-shadow: 0 0 0 3px rgba(47, 111, 208, 0.15);
+        }
+
+        .summer-menus button.active::after {
+            content: '選択中';
+            position: absolute;
+            top: -9px;
+            left: 12px;
+            background: #2f6fd0;
+            color: #fff;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 8px;
+            border-radius: 999px;
+        }
+
+        .summer-menu-name {
+            display: block;
+            margin-bottom: 5px;
+            color: #1c3d66;
+            font-size: 13.5px;
+            font-weight: bold;
+            line-height: 1.4;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .summer-menu-time {
+            display: block;
+            margin-bottom: 5px;
+            color: #7d97b4;
+            font-size: 11.5px;
+            text-align: left;
+        }
+
+        .summer-menu-price {
+            display: block;
+            margin-bottom: 0;
+            font-size: 12px;
+            white-space: nowrap;
+            text-align: left;
+        }
+
+        .price-before {
+            color: #8ba3bd;
+            text-decoration: line-through;
+        }
+
+        .price-arrow {
+            margin: 0 4px;
+            color: #e0447a;
+            font-weight: bold;
+        }
+
+        .price-after {
+            color: #e0447a;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .summer-menu-save {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .summer-campaign-title-main { font-size: 19px; }
+            .summer-menu-name { font-size: 13px; }
+        }
+
+        @media (max-width: 360px) {
+            .summer-menu-name { font-size: 12px; }
+            .summer-menu-price { font-size: 11px; }
+        }
+
+        /* ===== カレンダー ===== */
         .calendar-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            /* カレンダーを中央に配置 */
             margin-bottom: 20px;
             position: relative;
-            width: 106%;
-            /* 横幅を広げる */
-            margin-left: -7%;
-            /* 親要素の中心にカレンダーを配置 */
+            width: 100%;
+            margin-left: 0;
+        }
+
+        .week-button-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .week-button {
+            padding: 9px 16px;
+            background: #fff;
+            color: #2f6fd0;
+            border: 1.5px solid #9dc3f0;
+            border-radius: 999px;
+            font-size: 12.5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 0;
+        }
+
+        .current-month {
+            font-size: 14px;
+            font-weight: bold;
+            color: #1c3d66;
+            margin-left: 0;
         }
 
         .calendar {
             flex: 1;
             background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #c3ddf2;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(28, 92, 160, 0.1);
             overflow: hidden;
-            /* 横スクロールを防ぐ */
-            width: 106%;
+            width: 100%;
         }
 
         .calendar table {
@@ -139,125 +696,103 @@
         .calendar th,
         .calendar td {
             text-align: center;
-            padding: 5px;
+            padding: 6px 2px;
             cursor: pointer;
-            vertical-align: top;
-            width: 14.28%;
-            /* 7日間が一列に収まるように設定 */
+            vertical-align: middle;
+            width: 12.5%;
             box-sizing: border-box;
-            border: 1px solid #000;
-            /* ここで区切り線を追加 */
+            border: 1px solid #e2eef9;
+            font-size: 12px;
         }
 
         .calendar th {
-            background-color: #f7f7f7;
-            /* カレンダーのヘッダー部分の背景色を薄いグレーに設定 */
+            background-color: #e9f3fc;
+            color: #35618f;
+            font-size: 11.5px;
+            padding: 8px 2px;
+        }
+
+        .calendar th:first-child {
+            background-color: #dcebfb;
+        }
+
+        .calendar td:first-child {
+            background-color: #f3f9fe;
+            color: #35618f;
+            font-weight: bold;
+            font-size: 11px;
+            cursor: default;
         }
 
         .calendar td:hover {
-            background-color: #ddd;
-            /* カレンダーのセルにマウスを乗せたときの背景色を少し濃いグレーに設定 */
+            background-color: #eaf3ff;
         }
 
         .calendar td.selected {
-            background-color: #13ca5e;
-            /* 選択されたカレンダーのセルの背景色を緑色に設定 */
+            background: linear-gradient(135deg, #3d7fd9, #1e5cb0);
             color: #fff;
-            /* 選択されたセルのテキスト色を白に設定 */
-        }
-
-        .week-button-container {
-            display: flex;
-            /* 子要素を横方向に並べるためにflexboxを使用 */
-            justify-content: space-between;
-            /* 子要素を左右に均等に配置 */
-            align-items: center;
-            /* 子要素を縦方向の中央に揃える */
-            width: 100%;
-            /* コンテナの幅を100%に設定 */
-            margin-bottom: 10px;
-            /* 下に10pxのマージンを追加 */
-        }
-
-        .week-button {
-            padding: 10px 20px;
-            /* 上下10px、左右20pxの内側の余白を追加 */
-            background-color: #444;
-            /* ボタンの背景色を濃いグレーに設定 */
-            color: #fff;
-            /* ボタンのテキスト色を白に設定 */
-            border: none;
-            /* ボタンの境界線を削除 */
-            border-radius: 4px;
-            /* ボタンの角を4pxの半径で丸める */
-            cursor: pointer;
-            /* マウスカーソルをポインター（指の形）に変更 */
-            margin-left: 31px;
-            /* 左側に20pxの余白を追加して右にずらす */
-        }
-
-        .current-month {
-            font-size: 14px;
-            /* フォントサイズを16pxに設定 */
             font-weight: bold;
-            /* テキストを太字に設定 */
-            color: #444;
-            /* テキストの色を濃いグレーに設定 */
-            margin-left: 30px;
-            /* 10pxだけ右にずらす */
         }
 
+        .available {
+            color: #2f6fd0;
+            font-weight: bold;
+        }
+
+        .unavailable {
+            background-color: #f2f5f8;
+            color: #b7c6d6;
+            cursor: default;
+        }
+
+        .calendar-legend {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            gap: 16px;
+            font-size: 11.5px;
+            color: #7d97b4;
+            margin-top: 8px;
+            padding-left: 2px;
+            box-sizing: border-box;
+        }
+
+        .calendar-legend .lg-ok { color: #2f6fd0; font-weight: bold; }
+        .calendar-legend .lg-ng { color: #b7c6d6; font-weight: bold; }
+
+        /* ===== ローディング ===== */
         .loading-spinner {
             position: fixed;
-            /* 画面全体に対応 */
             top: 50%;
-            /* 縦中央 */
             left: 50%;
-            /* 横中央 */
             transform: translate(-50%, -50%);
             display: none;
-            /* 初期状態は非表示 */
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.6);
-            /* 半透明の黒背景で注目度アップ */
+            background-color: rgba(23, 65, 126, 0.72);
             padding: 40px;
-            /* 周囲に余白をつける */
-            border-radius: 10px;
-            /* 角丸で柔らかい印象 */
+            border-radius: 14px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            /* 少し立体感を追加 */
+            z-index: 10;
         }
 
         .spinner {
             width: 60px;
-            /* スピナーをさらに大きく */
             height: 60px;
             border: 5px solid rgba(255, 255, 255, 0.2);
-            /* 薄い白で枠を柔らかく */
-            border-top-color: #00d1ff;
-            /* 明るい青で目立たせる */
+            border-top-color: #7ec8f2;
             border-radius: 50%;
-            /* 丸い形状 */
             animation: spin 0.7s linear infinite;
-            /* 滑らかで速い回転 */
             margin-left: 12px;
-            /* スピナーを右にずらす */
         }
 
         .loading-text {
             margin-top: 20px;
-            /* スピナーとテキストの間隔 */
             font-size: 15px;
-            /* さらに大きなフォントサイズ */
             font-weight: bold;
-            /* 太字で目立たせる */
             color: #ffffff;
-            /* 純白で高いコントラスト */
             letter-spacing: 1px;
-            /* 文字間隔を広げてモダンな印象に */
             text-align: center;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-            /* テキストに影をつけて視認性アップ */
         }
 
         @keyframes spin {
@@ -266,255 +801,235 @@
             }
         }
 
-        .available {
-            color: red;
-        }
-
-        .unavailable {
-            background-color: #d3d3d3;
-        }
-
-        .menu-section {
-            display: none;
-        }
-
-        .menu-section.active {
-            display: block;
-        }
-
+        /* ===== 施術詳細カード ===== */
         #repairLabel,
         #repairButtons {
             display: none;
         }
 
         #treatment-text {
-            background-color: #eef9f5;
+            background-color: #eef6ff;
             padding: 10px;
-            border-radius: 4px;
+            border-radius: 10px;
             margin-top: 20px;
         }
 
-        .highlight-background {
-            background-color: #f9f9d6;
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            margin-top: 10px;
-            /* 上に余白を追加 */
+        .treatment-container {
             text-align: center;
-            /* コンテナ内の要素を中央に配置 */
+            padding: 12px;
+            background-color: #f6fbff;
+            color: #1c3d66;
+            border-radius: 12px;
+            border: 1px solid #c3ddf2;
+            box-shadow: 0 2px 8px rgba(28, 92, 160, 0.08);
+            max-width: 100%;
+            margin: auto;
         }
 
-        .highlight-text {
-            display: block;
-            font-weight: bold;
+        .treatment-image {
             text-align: center;
-            /* テキストを中央揃えにする */
+            margin-top: 15px;
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            height: 260px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1.5px solid #e6cd8a;
+            box-shadow: 0 4px 12px rgba(28, 92, 160, 0.12);
+            margin: 15px auto;
+        }
+
+        .treatment-description {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f6fbff;
+            color: #35618f;
+            border-radius: 12px;
+            border: 1px solid #d5e6f5;
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: left;
+            max-width: 100%;
+            margin: 15px auto;
+        }
+
+        .treatment-price {
+            margin-top: 15px;
+            padding: 10px;
+            background: #fff;
+            color: #1c3d66;
+            border-radius: 12px;
+            border: 1.5px solid #e6cd8a;
+            font-weight: bold;
+            font-size: 15px;
+            text-align: right;
+            max-width: 100%;
+            margin: 15px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+        }
+
+        .inline-treatment-text {
+            display: block;
+            margin-top: 8px;
+            margin-bottom: 8px;
+            width: 100%;
+        }
+
+        .spinner-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 24px;
+            color: #1c3d66;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        /* ===== ご予約内容 ===== */
+        #displayInfo {
+            background: #fff;
+            border: 1px solid #d8e5f2;
+            border-radius: 12px;
+            padding: 14px 16px;
+            font-size: 13.5px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        #displayInfo p {
+            margin: 6px 0;
+        }
+
+        #displayInfo hr {
+            border: none;
+            border-top: 1px solid #dcebfb;
+            margin: 6px 0;
+        }
+
+        #displayInfo span[style*="red"] {
+            color: #1e5cb0 !important;
+        }
+
+        /* ===== 送信ボタン ===== */
+        .submit-button {
+            width: 100%;
+            padding: 17px;
+            border: none;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #4a90dd 0%, #2a5da8 55%, #17417e 100%);
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(23, 65, 126, 0.38);
+            position: relative;
+        }
+
+        .submit-button::before {
+            content: "✦ ";
+            color: #ffd95e;
+            font-size: 14px;
+        }
+
+        .submit-button::after {
+            content: " ✦";
+            color: #ffd95e;
+            font-size: 14px;
+        }
+
+        .date-inputs input[type="datetime-local"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #c3ddf2;
+            border-radius: 8px;
+            box-sizing: border-box;
         }
 
         .red-circle {
-            color: red;
-            /* 赤色に設定 */
+            color: #e0447a;
         }
 
         .bold-cross {
             font-weight: bold;
-            /* 太文字に設定 */
         }
-
-        .info-text {
-    margin-top: 20px;
-    /* 上の余白 */
-    margin-bottom: 10px; /* 下に白い隙間を追加 */
-    font-size: 13px;
-    color: #000000;
-    line-height: 1.5;
-    text-align: center;
-    word-wrap: break-word;
-    background-color: #eef9f5; /* 青っぽい背景色を追加 */
-    padding: 10px;
-    border-radius: 4px;
-}
-
-        /* 携帯端末向けのレスポンシブデザイン */
-        @media (max-width: 768px) {
-            .info-text {
-                font-size: 11.5px;
-                /* スマホでは少し小さく */
-                margin-top: 10px;
-                /* 上下のマージンを調整 */
-                line-height: 2.0;
-                /* テキストの高さ調整 */
-            }
-        }
-
-        .symptoms,
-        .options {
-            display: block;
-            /* ボタンを縦並びに */
-        }
-
-        .symptoms button,
-        .options button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #f7f7f7;
-            cursor: pointer;
-            box-sizing: border-box;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .symptoms button.active,
-        .options button.active {
-            background-color: #444;
-            color: #fff;
-        }
-
-        .highlight-background {
-            cursor: pointer;
-            background-color: #f7c11e;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 18px;
-            /* テキストを読みやすく */
-            display: flex;
-            justify-content: center;
-            /* オプションを中央寄せ */
-            align-items: center;
-            position: relative;
-            /* プラス記号を右端に配置 */
-        }
-
-        .symptoms,
-        .options {
-            display: block;
-            /* ボタンを縦並びに */
-        }
-
-        .highlight-text {
-            font-weight: bold;
-            display: inline-block;
-            color: #fff;
-            /* オプションテキストの色 */
-        }
-        .treatment-container {
-        text-align: center;
-        padding: 10px;
-        background-color: #ffffff;
-        color: #333;
-        border-radius: 8px;
-        border: 1px solid #e0e0e0;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        max-width: 100%;
-        margin: auto;
-    }
-    .treatment-image {
-        text-align: center;
-        margin-top: 15px;
-        position: relative;
-        width: 100%;
-        max-width: 100%;
-        height: 260px;
-        border-radius: 8px;
-        overflow: hidden;
-        border: 1px solid #d4af37;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        margin: 15px auto;
-    }
-    .treatment-description {
-        margin-top: 15px;
-        padding: 15px;
-        background-color: #fafafa;
-        color: #555;
-        border-radius: 8px;
-        border: 1px solid #e0e0e0;
-        font-size: 14px;
-        line-height: 1.5;
-        text-align: left;
-        max-width: 100%;
-        margin: 15px auto;
-    }
-    .treatment-price {
-        margin-top: 15px;
-        padding: 10px;
-        background: #fff;
-        color: #333;
-        border-radius: 8px;
-        border: 1px solid #d4af37;
-        font-weight: bold;
-        font-size: 15px;
-        text-align: right;
-        max-width: 100%;
-        margin: 15px auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 10px;
-    }
-    /* インラインでボタンの直下に挿入されるtreatmentエリア */
-    .inline-treatment-text {
-        display: block;
-        margin-top: 8px;
-        margin-bottom: 8px;
-        width: 100%;
-    }
-    /* symptoms内のボタンを縦並び幅100%に */
-    .symptoms {
-        display: block !important;
-    }
-    .symptoms button {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .spinner-overlay {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 1;
-    }
-    .title {
-    font-size: 24px;
-    color: #4A4A4A;
-    text-align: center;
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>R and R beauty salon<br>予約フォーム
-        </h1>
-        <div class="label">お客様名</div>
+        <div class="sky-header">
+            <img class="header-visual" src="data:image/jpeg;base64,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" alt="R and R beauty salon">
+        </div>
+
+        <div class="label">お客様名 <span class="badge-req">必須</span></div>
         <div class="info-text">予約システムの方がリニューアルいたしました。<br>新予約システムでのご予約が初めての方は<br>お手数ですがお名前のご入力をお願いいたします。</div>
-        <input type="text" id="name" placeholder="お名前を入力してください">
+        <input type="text" id="name" placeholder="例）山田 花子">
+        <div class="field-note">フルネームでご入力をお願いいたします。</div>
 
-        <div class="label">電話番号</div>
-        <input type="tel" id="phone" placeholder="電話番号を入力してください">
+        <div class="label">電話番号 <span class="badge-req">必須</span></div>
+        <input type="tel" id="phone" placeholder="例）09012345678">
+        <div class="field-note">ハイフンなしでご入力ください。</div>
 
-        <div class="label">ご来店回数</div>
+        <div class="label">ご来店回数 <span class="badge-req">必須</span></div>
         <div class="visit-buttons">
             <button type="button" id="firstVisit" onclick="selectVisit(this)">1回目</button>
             <button type="button" id="repeatVisit" onclick="selectVisit(this)">2回目以降</button>
         </div>
 
-        <!-- 6月キャンペーンクーポン -->
-        <div class="label">6月キャンペーンクーポンの利用</div>
-        <div class="visit-buttons">
-            <button type="button" id="couponBtn" onclick="selectCoupon(this)">6月クーポン利用する</button>
+        <!-- 夏割キャンペーン（期間限定メニュー） -->
+        <div class="summer-campaign" id="summerCampaign">
+            <div class="summer-campaign-badge">期間<br>限定</div>
+            <div class="summer-campaign-title">
+                ☀️ 今がチャンス！ ☀️<br>
+                <span class="flourish"></span><span class="summer-campaign-title-main">お盆までの夏割キャンペーン</span><span class="flourish"></span>
+            </div>
+            <div class="summer-campaign-note">
+                下記メニューを選ぶと<br>そのまま希望日時の選択に進めます
+            </div>
+            <div class="symptoms summer-menus">
+                <button type="button" data-campaign="1" data-name="眉毛WAX＋パリジャンブロウ" data-price="5000"
+                    onclick="selectSymptom(this, 'summer1')">
+                    <span class="summer-menu-name">① 眉毛WAX＋パリジャンブロウ</span>
+                    <span class="summer-menu-time">所要時間：90分</span>
+                    <span class="summer-menu-price">
+                        <span class="price-before">通常 5,500円</span><span class="price-arrow">▶</span><span class="price-after">5,000円</span>
+                    </span>
+                    <span class="summer-menu-save">500円お得！</span>
+                </button>
+                <button type="button" data-campaign="1" data-name="眉毛WAX＋ラッシュリフト" data-price="8000"
+                    onclick="selectSymptom(this, 'summer2')">
+                    <span class="summer-menu-name">② 眉毛WAX＋ラッシュリフト</span>
+                    <span class="summer-menu-time">所要時間：120分</span>
+                    <span class="summer-menu-price">
+                        <span class="price-before">通常 9,350円</span><span class="price-arrow">▶</span><span class="price-after">8,000円</span>
+                    </span>
+                    <span class="summer-menu-save">1,350円お得！</span>
+                </button>
+                <button type="button" data-campaign="1" data-name="眉毛WAX＋フェイシャルWAX" data-price="11000"
+                    onclick="selectSymptom(this, 'summer3')">
+                    <span class="summer-menu-name">③ 眉毛WAX＋フェイシャルWAX</span>
+                    <span class="summer-menu-time">所要時間：150分</span>
+                    <span class="summer-menu-price">
+                        <span class="price-before">通常 13,200円</span><span class="price-arrow">▶</span><span class="price-after">11,000円</span>
+                    </span>
+                    <span class="summer-menu-save">2,200円お得！</span>
+                </button>
+            </div>
         </div>
 
-        <div class="label">メニューをお選びください</div>
+        <div class="label">メニューカテゴリ <span class="badge-req">必須</span></div>
         <div class="info-text">※メニューを選択すると<br>空き状況のカレンダーが表示されます</div>
         <div class="menu-sections">
             <button type="button" onclick="showMenu('male')">まつ毛</button>
@@ -593,12 +1108,13 @@
             </div>
         </div>
 
-        <div class="label">希望日時<br>（メニュー選択後に選択ください）</div>
+        <div class="label" id="dateSection">希望日時 <span class="badge-req">必須</span></div>
+        <div class="info-text">メニュー選択後にお選びください</div>
         <div class="calendar-container">
             <div class="week-button-container">
-                <button class="week-button" onclick="previousWeek()">前の週<br>←</button>
+                <button class="week-button" onclick="previousWeek()">前の週 ←</button>
                 <span class="current-month" id="currentMonth">月</span>
-                <button class="week-button" onclick="nextWeek()">次の週<br>→</button>
+                <button class="week-button" onclick="nextWeek()">次の週 →</button>
             </div>
             <div id="calendar1" class="calendar">
                 <table>
@@ -619,20 +1135,42 @@
                     </tbody>
                 </table>
             </div>
+            <div class="calendar-legend"><span><span class="lg-ok">◯</span>：空きあり</span><span><span class="lg-ng">✕</span>：空きなし</span></div>
             <div class="loading-spinner" id="loadingSpinner">
                 <div class="spinner"></div>
                 <div class="loading-text">読み込み中...</div>
             </div>
         </div>
 
-        <div class="label">メッセージ<br>（質問等お気軽にご記入ください）</div>
-        <textarea id="message" rows="4" placeholder="メッセージを入力してください"></textarea>
+        <div class="label">メッセージ <span class="badge-opt">任意</span></div>
+        <textarea id="message" rows="4" placeholder="ご要望やご質問などがございましたらご入力ください。"></textarea>
 
-        <div class="label">ご予約内容</div>
+        <div class="label">ご予約内容の確認</div>
         <div id="displayInfo"></div> <!-- ここに選択された情報を表示します -->
 
         <button class="submit-button" onclick="submitForm()">予約を行う</button>
     </div>
+
+    <script>
+        // デザイン用：通常メニューのボタンに「メニュー名｜価格＋矢印」のレイアウトを適用する
+        // 機能に影響しないよう、元のメニュー名は data-name に退避してから装飾する
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.menu-section .symptoms button').forEach(function (btn) {
+                if (!btn.dataset.name) {
+                    btn.dataset.name = btn.textContent.trim();
+                }
+                var price = parseInt(btn.getAttribute('data-price'), 10);
+                var priceText = isNaN(price) ? '' : price.toLocaleString() + '円';
+                btn.innerHTML = '<span class="m-name">' + btn.innerHTML + '</span>' +
+                    '<span class="m-price">' + priceText + '<i class="chev">›</i></span>';
+            });
+
+            // ご予約内容の確認テーブルを初期表示する（表示のみ、データは変更しない）
+            if (typeof updateDisplayInfo === 'function') {
+                updateDisplayInfo();
+            }
+        });
+    </script>
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script>
@@ -646,7 +1184,7 @@
         let menuPrice = 0; // メニューの価格
         let optionsPrice = 0; // オプションの合計価格
 
-        // 施術詳細カードのHTMLを生成するグローバル関数（selectCouponからも参照できるよう外に定義）
+        // 施術詳細カードのHTMLを生成するグローバル関数
         function createTreatmentContent(title, imageUrl, description, price, time) {
             return `
                 <div class="treatment-container">
@@ -751,28 +1289,37 @@
             '眉毛WAX＋眉毛パーマ': 90,
             'ラッシュリフト（まつ毛パーマ）上のみ': 75,
             'ラッシュリフト（まつ毛パーマ）下のみ': 45,
-            'ラッシュリフト（まつ毛パーマ）上下セット': 90
+            'ラッシュリフト（まつ毛パーマ）上下セット': 90,
+            // 夏割キャンペーン（期間限定メニュー）
+            '眉毛WAX＋パリジャンブロウ': 90,
+            '眉毛WAX＋ラッシュリフト': 120,
+            '眉毛WAX＋フェイシャルWAX': 150
         };
 
-        let couponSelection = ''; // 6月クーポン選択状態
+        let couponSelection = ''; // 夏割キャンペーン選択状態
+
+        // ボタンから送信用のメニュー名を取得する（キャンペーンボタンはdata-nameを使う）
+        function getMenuName(button) {
+            return button.dataset.name || button.textContent;
+        }
         let selectedMenuTime = 0; // 選択されたメニューの所要時間
 
         function updateDisplayInfo() {
             const name = document.getElementById('name').value;
-            const visitCountText = visitCount ? `・<span style="color:red;"><strong>ご来店回数</strong></span>：${visitCount}` : '・来店回数が未選択です';
-            const couponText = couponSelection
-                ? `・<span style="color:red;"><strong>クーポン</strong></span>：${couponSelection}`
-                : '・クーポン利用なし';
+            const phoneEl = document.getElementById('phone');
+            const phoneValue = phoneEl ? phoneEl.value : '';
+            const visitCountText = visitCount ? visitCount : '<span class="sum-empty">未選択</span>';
+            const couponText = couponSelection ? couponSelection : '<span class="sum-empty">利用なし</span>';
 
             // メニューが選択されていたら、各メニューを改行して表示
             const selectedSymptomText = selectedSymptom.length > 0
-                ? `<span style="color:red;"><strong>【メニュー】</strong></span><br>${selectedSymptom.join('<br>')}`
-                : '・メニューが未選択です';
+                ? selectedSymptom.join('<br>')
+                : '<span class="sum-empty">未選択</span>';
 
             // オプションが選択されていたら、各オプションを改行して表示
             const irradiationsText = irradiationsCount
-                ? `<span style="color:red;"><strong>【オプション】</strong></span><br>${irradiationsCount.split(', ').join('<br>')}`
-                : '・オプション無し';
+                ? irradiationsCount.split(', ').join('<br>')
+                : '<span class="sum-empty">なし</span>';
 
             // 所要時間を計算
             let totalMinutes = selectedMenuTime + selectedirradiationsTime + selectedVisitTime;
@@ -780,32 +1327,25 @@
             let minutes = totalMinutes % 60;
 
             // 所要時間の表示形式：○○時間○○分
-            let totalTimeText = `・<span style="color:red;"><strong>所要時間</strong></span>：${hours > 0 ? hours + '時間' : ''}${minutes}分`;
+            let totalTimeText = `${hours > 0 ? hours + '時間' : ''}${minutes}分`;
 
             // 合計金額の表示
-            const totalAmountText = `・<span style="color:red;"><strong>合計金額</strong></span>：¥${menuPrice + optionsPrice}`;
+            const totalAmountText = `¥${(menuPrice + optionsPrice).toLocaleString()}`;
 
             // 希望日時が選択された場合の表示
-            const selectedDateText = selectedFullDate ? `・<span style="color:red;"><strong>希望日時</strong></span>：${selectedFullDate}` : '・日時が未選択です';
+            const selectedDateText = selectedFullDate ? selectedFullDate : '<span class="sum-empty">未選択</span>';
 
-            // displayInfo要素に情報を表示
+            // displayInfo要素に情報を表示（アイコン付きの確認テーブル）
             document.getElementById('displayInfo').innerHTML = `
-        <p>・<span style="color:red;"><strong>お名前</strong></span>：${name}</p>
-        <hr>
-        <p>${visitCountText}</p>
-        <hr>
-        <p>${couponText}</p>
-        <hr>
-        <p>${selectedSymptomText}</p>
-        <hr>
-        <p>${irradiationsText}</p>
-        <hr>
-        <p>${totalTimeText}</p>
-        <hr>
-        <p>${selectedDateText}</p>
-        <hr>
-        <p>${totalAmountText}</p>
-        <hr>
+        <div class="sum-row"><span class="sum-ic sum-ic-user"></span><span class="sum-label">お客様名</span><span class="sum-val">${name ? name + ' 様' : '<span class="sum-empty">未入力</span>'}</span></div>
+        <div class="sum-row"><span class="sum-ic sum-ic-phone"></span><span class="sum-label">電話番号</span><span class="sum-val">${phoneValue ? phoneValue : '<span class="sum-empty">未入力</span>'}</span></div>
+        <div class="sum-row"><span class="sum-ic sum-ic-heart"></span><span class="sum-label">ご来店回数</span><span class="sum-val">${visitCountText}</span></div>
+        <div class="sum-row"><span class="sum-ic sum-ic-spark"></span><span class="sum-label">夏割</span><span class="sum-val">${couponText}</span></div>
+        <div class="sum-row"><span class="sum-ic sum-ic-lash"></span><span class="sum-label">メニュー</span><span class="sum-val">${selectedSymptomText}</span></div>
+        <div class="sum-row"><span class="sum-ic sum-ic-plus"></span><span class="sum-label">オプション</span><span class="sum-val">${irradiationsText}</span></div>
+        <div class="sum-row"><span class="sum-ic sum-ic-clock"></span><span class="sum-label">所要時間</span><span class="sum-val">${totalTimeText}</span></div>
+        <div class="sum-row"><span class="sum-ic sum-ic-cal"></span><span class="sum-label">希望日時</span><span class="sum-val">${selectedDateText}</span></div>
+        <div class="sum-row"><span class="sum-ic sum-ic-yen"></span><span class="sum-label">合計金額</span><span class="sum-val">${totalAmountText}</span></div>
     `;
         }
 
@@ -872,11 +1412,15 @@
                 }
 
                 // 選択されたメニューの時間を取得して保存
-                const selectedMenu = button.textContent;
+                const selectedMenu = getMenuName(button);
                 selectedMenuTime = menuTimes[selectedMenu] || 0; // メニュー時間を取得して保存
                 selectedSymptom = [selectedMenu]; // 選択されたメニュー名を配列として保存
                 menuPrice = parseInt(button.getAttribute('data-price'), 10) || 0;  // メニューの価格を取得
             }
+
+            // 夏割キャンペーンのメニューが選ばれているかを反映
+            const activeCampaign = document.querySelector('.summer-menus button.active');
+            couponSelection = activeCampaign ? `夏割キャンペーン（${activeCampaign.dataset.name}）` : '';
 
             console.log('選択されたメニューの時間:', selectedMenuTime);
 
@@ -890,6 +1434,15 @@
             if (!button.classList.contains('active')) {
                 // 選択解除時は何もしない
                 updateDisplayInfo();
+                return;
+            }
+
+            // 夏割キャンペーンのメニューは詳細カードを出さず、希望日時までスクロールする
+            if (button.dataset.campaign) {
+                updateDisplayInfo();
+                setTimeout(() => {
+                    document.getElementById('dateSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 150);
                 return;
             }
 
@@ -1099,13 +1652,11 @@ if (treatmentId === 'treatment1') {
         '30分'
     );
 } else if (treatmentId === 'treatment29') {
-    // クーポン選択状態によって価格を切り替える
-    const treatment29Price = couponSelection ? 'キャンペーン料金：5,000円' : '5,500円';
     treatmentText.innerHTML = createTreatmentContent(
         '眉毛WAX＋眉毛パーマ',
         'https://www.dropbox.com/scl/fi/v0otfztvwoyrm4z2cfp1j/WAX.png?rlkey=4d1zzrptkz75j98dzfcekmdzy&st=ekmnqkk0&raw=1',
         'アイブロウWAX✖️パリジャンブロウ<br>のお得なセットメニュー✨<br>幅広いお客様の理想の眉を叶えるコース',
-        treatment29Price,
+        '5,500円',
         '90分'
     );
 } else if (treatmentId === 'treatment25') {
@@ -1137,7 +1688,7 @@ if (treatmentId === 'treatment1') {
             }
 
             // 選択されたメニューの名前と価格を取得
-            const symptomName = button.textContent;  // ボタンのテキストを取得
+            const symptomName = getMenuName(button);  // ボタンのテキストを取得
             selectedSymptom = [symptomName];  // 選択されたメニュー名を配列として保存
             menuPrice = parseInt(button.getAttribute('data-price'), 10) || 0;  // メニューの価格を取得
 
@@ -1205,36 +1756,6 @@ if (treatmentId === 'treatment1') {
             fetchAvailability(currentDate);
         }
 
-        function selectCoupon(element) {
-            // クーポンボタンのトグル
-            if (element.classList.contains('active')) {
-                element.classList.remove('active');
-                couponSelection = '';
-            } else {
-                element.classList.add('active');
-                couponSelection = '6月クーポン利用する';
-            }
-
-            // 眉毛WAX＋眉毛パーマ（treatment29）が選択済みの場合、詳細表示の価格を更新する
-            const activeTreatment29 = document.querySelector('#whitening .symptoms button[onclick*="treatment29"].active');
-            if (activeTreatment29) {
-                const existingTreatmentText = activeTreatment29.nextElementSibling;
-                if (existingTreatmentText && existingTreatmentText.classList.contains('inline-treatment-text')) {
-                    const newPrice = couponSelection ? 'キャンペーン料金：5,000円' : '5,500円';
-                    // createTreatmentContentを再呼び出しして価格を更新
-                    existingTreatmentText.innerHTML = createTreatmentContent(
-                        '眉毛WAX＋眉毛パーマ',
-                        'https://www.dropbox.com/scl/fi/v0otfztvwoyrm4z2cfp1j/WAX.png?rlkey=4d1zzrptkz75j98dzfcekmdzy&st=ekmnqkk0&raw=1',
-                        'アイブロウWAX✖️パリジャンブロウ<br>のお得なセットメニュー✨<br>幅広いお客様の理想の眉を叶えるコース',
-                        newPrice,
-                        '90分'
-                    );
-                }
-            }
-
-            updateDisplayInfo();
-        }
-
         function showMenu(menu) {
             // すべてのメニューボタンの選択状態をリセット
             document.querySelectorAll('.menu-sections button').forEach(button => {
@@ -1257,12 +1778,20 @@ if (treatmentId === 'treatment1') {
             // 選択されたメニューセクションを表示
             document.getElementById(menu).classList.add('active');
 
+            // 夏割キャンペーンの選択と施術詳細もリセット
+            document.querySelectorAll('.summer-menus button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.inline-treatment-text').forEach(el => el.remove());
+            document.querySelector('.calendar-container').style.display = 'none';
+
             // メニューとオプションをリセット
             selectedSymptom = '';      // メニューのリセット
             irradiationsCount = '';    // オプションのリセット
             menuPrice = 0;             // メニューの価格リセット
             optionsPrice = 0;          // オプションの価格リセット
             totalAmount = 0;           // 合計金額リセット
+            couponSelection = '';      // 夏割キャンペーンのリセット
+            selectedMenuTime = 0;      // 所要時間リセット
+            selectedFullDate = '';     // 希望日時リセット
 
             // 表示を更新
             updateDisplayInfo();
@@ -1317,7 +1846,7 @@ if (treatmentId === 'treatment1') {
             // LINEトークにメッセージを送信
             liff.sendMessages([{
                 type: 'text',
-                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\n6月クーポン：${couponSelection || 'なし'}\nメニュー：${formData.selectedSymptom},${formData.irradiationsCount}\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
+                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\n夏割キャンペーン：${couponSelection || 'なし'}\nメニュー：${formData.selectedSymptom},${formData.irradiationsCount}\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
             }]).then(() => {
                 /* メッセージ送信成功時の処理 */
                 alert('当日キャンセルは無いようにお願いいたします。');
