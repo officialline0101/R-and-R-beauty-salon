@@ -319,6 +319,134 @@
             box-shadow: 0 4px 12px rgba(30, 92, 176, 0.18);
         }
 
+        /* カテゴリボタンに付く選択件数バッジ */
+        .menu-sections button .cat-count {
+            display: none;
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            min-width: 17px;
+            height: 17px;
+            line-height: 17px;
+            padding: 0 4px;
+            border-radius: 9px;
+            background: #2f6fd0;
+            color: #fff;
+            font-size: 10.5px;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        .menu-sections button {
+            position: relative;
+        }
+
+        .menu-sections button .cat-count.on {
+            display: block;
+        }
+
+        /* ===== 選択中メニューのナビゲーション ===== */
+        .menu-nav {
+            margin: 12px 0 18px;
+            padding: 12px;
+            border: 1.5px solid #c3ddf2;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #f5faff, #eaf3fd);
+            box-sizing: border-box;
+        }
+
+        .menu-nav-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .menu-nav-title {
+            font-size: 13px;
+            font-weight: bold;
+            color: #1e5cb0;
+        }
+
+        .menu-nav-count {
+            font-size: 12px;
+            font-weight: bold;
+            color: #fff;
+            background: #2f6fd0;
+            border-radius: 10px;
+            padding: 3px 10px;
+        }
+
+        .menu-nav-count.full {
+            background: #c9a44a;
+        }
+
+        .menu-nav-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .menu-nav-empty {
+            font-size: 12px;
+            color: #7b93ad;
+        }
+
+        .menu-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            max-width: 100%;
+            padding: 6px 8px 6px 10px;
+            border: 1.5px solid #9dc3f0;
+            border-radius: 999px;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(28, 92, 160, 0.08);
+        }
+
+        .menu-chip-cat {
+            flex: none;
+            font-size: 10.5px;
+            font-weight: bold;
+            color: #fff;
+            background: #2f6fd0;
+            border-radius: 8px;
+            padding: 2px 7px;
+        }
+
+        .menu-chip.campaign .menu-chip-cat {
+            background: #c9a44a;
+        }
+
+        .menu-chip-name {
+            font-size: 12px;
+            font-weight: bold;
+            color: #1c3d66;
+            line-height: 1.35;
+            word-break: break-all;
+        }
+
+        .menu-chip-x {
+            flex: none;
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            background: #e5eef8;
+            color: #4a6d96;
+            font-size: 13px;
+            line-height: 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .menu-nav-hint {
+            margin-top: 9px;
+            font-size: 11px;
+            color: #7b93ad;
+        }
+
         /* ===== メニュー（縦並びボタン） ===== */
         .symptoms {
             display: block !important;
@@ -999,27 +1127,27 @@
                 下記メニューを選ぶと<br>そのまま希望日時の選択に進めます
             </div>
             <div class="symptoms summer-menus">
-                <button type="button" data-campaign="1" data-name="眉毛WAX＋パリジャンブロウ" data-price="5000"
+                <button type="button" data-campaign="1" data-name="まゆ毛WAX＋パリジャンブロウ(眉毛パーマ)" data-price="5000"
                     onclick="selectSymptom(this, 'summer1')">
-                    <span class="summer-menu-name">① 眉毛WAX＋パリジャンブロウ</span>
+                    <span class="summer-menu-name">① まゆ毛WAX＋パリジャンブロウ<br>(眉毛パーマ)</span>
                     <span class="summer-menu-time">所要時間：90分</span>
                     <span class="summer-menu-price">
                         <span class="price-before">通常 5,500円</span><span class="price-arrow">▶</span><span class="price-after">5,000円</span>
                     </span>
                     <span class="summer-menu-save">500円お得！</span>
                 </button>
-                <button type="button" data-campaign="1" data-name="眉毛WAX＋ラッシュリフト" data-price="8000"
+                <button type="button" data-campaign="1" data-name="まゆ毛WAX＋ラッシュリフト(まつ毛パーマ)" data-price="8000"
                     onclick="selectSymptom(this, 'summer2')">
-                    <span class="summer-menu-name">② 眉毛WAX＋ラッシュリフト</span>
+                    <span class="summer-menu-name">② まゆ毛WAX＋ラッシュリフト<br>(まつ毛パーマ)</span>
                     <span class="summer-menu-time">所要時間：120分</span>
                     <span class="summer-menu-price">
                         <span class="price-before">通常 9,350円</span><span class="price-arrow">▶</span><span class="price-after">8,000円</span>
                     </span>
                     <span class="summer-menu-save">1,350円お得！</span>
                 </button>
-                <button type="button" data-campaign="1" data-name="眉毛WAX＋フェイシャルWAX" data-price="11000"
+                <button type="button" data-campaign="1" data-name="まゆ毛WAX＋フェイシャルWAX" data-price="11000"
                     onclick="selectSymptom(this, 'summer3')">
-                    <span class="summer-menu-name">③ 眉毛WAX＋フェイシャルWAX</span>
+                    <span class="summer-menu-name">③ まゆ毛WAX＋フェイシャルWAX</span>
                     <span class="summer-menu-time">所要時間：150分</span>
                     <span class="summer-menu-price">
                         <span class="price-before">通常 13,200円</span><span class="price-arrow">▶</span><span class="price-after">11,000円</span>
@@ -1030,12 +1158,22 @@
         </div>
 
         <div class="label">メニューカテゴリ <span class="badge-req">必須</span></div>
-        <div class="info-text">※メニューを選択すると<br>空き状況のカレンダーが表示されます</div>
+        <div class="info-text">※メニューを選択すると<br>空き状況のカレンダーが表示されます<br>※カテゴリをまたいで最大3つまで選択できます</div>
         <div class="menu-sections">
             <button type="button" onclick="showMenu('male')">まつ毛</button>
             <button type="button" onclick="showMenu('female')">ネイル</button>
             <button type="button" onclick="showMenu('whitening')">眉毛</button>
             <button type="button" onclick="showMenu('WAX')">WAX</button>
+        </div>
+
+        <!-- 選択中メニューのナビゲーション（最大3つまで／カテゴリまたぎ可） -->
+        <div class="menu-nav" id="menuNav">
+            <div class="menu-nav-head">
+                <span class="menu-nav-title">選択中のメニュー</span>
+                <span class="menu-nav-count" id="menuNavCount">0 / 3</span>
+            </div>
+            <div class="menu-nav-list" id="menuNavList"></div>
+            <div class="menu-nav-hint">カテゴリをまたいで最大3つまで選択できます</div>
         </div>
 
         <!-- treatment-text は各メニューセクション内に移動 -->
@@ -1239,6 +1377,9 @@
             });
 
             fetchAvailability(currentDate);
+
+            // 選択中メニューのナビゲーションを初期表示
+            renderMenuNav(getActiveMenuButtons());
         });
 
         // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
@@ -1291,9 +1432,20 @@
             'ラッシュリフト（まつ毛パーマ）下のみ': 45,
             'ラッシュリフト（まつ毛パーマ）上下セット': 90,
             // 夏割キャンペーン（期間限定メニュー）
-            '眉毛WAX＋パリジャンブロウ': 90,
-            '眉毛WAX＋ラッシュリフト': 120,
-            '眉毛WAX＋フェイシャルWAX': 150
+            'まゆ毛WAX＋パリジャンブロウ(眉毛パーマ)': 90,
+            'まゆ毛WAX＋ラッシュリフト(まつ毛パーマ)': 120,
+            'まゆ毛WAX＋フェイシャルWAX': 150
+        };
+
+        // 選択できるメニューの最大数
+        const MAX_MENU_SELECTION = 3;
+
+        // カテゴリID → 表示名（選択中メニューのナビゲーション用）
+        const CATEGORY_LABELS = {
+            male: 'まつ毛',
+            female: 'ネイル',
+            whitening: '眉毛',
+            WAX: 'WAX'
         };
 
         let couponSelection = ''; // 夏割キャンペーン選択状態
@@ -1311,9 +1463,10 @@
             const visitCountText = visitCount ? visitCount : '<span class="sum-empty">未選択</span>';
             const couponText = couponSelection ? couponSelection : '<span class="sum-empty">利用なし</span>';
 
-            // メニューが選択されていたら、各メニューを改行して表示
-            const selectedSymptomText = selectedSymptom.length > 0
-                ? selectedSymptom.join('<br>')
+            // メニューが選択されていたら、各メニューを番号付きで改行して表示
+            const selectedMenuList = Array.isArray(selectedSymptom) ? selectedSymptom : [];
+            const selectedSymptomText = selectedMenuList.length > 0
+                ? selectedMenuList.map((menu, index) => `${index + 1}. ${menu}`).join('<br>')
                 : '<span class="sum-empty">未選択</span>';
 
             // オプションが選択されていたら、各オプションを改行して表示
@@ -1388,61 +1541,161 @@
             });
         });
 
-        function selectSymptom(button, treatmentId) {
-            // 選択された日時をリセット
-            selectedFullDate = '';
+        // 選択中のメニューボタンを一覧で取得する
+        function getActiveMenuButtons() {
+            return Array.from(document.querySelectorAll('.symptoms button.active'));
+        }
 
-            // ボタンの選択状態を切り替える
-            button.classList.toggle('active');
+        // メニューボタンが属するカテゴリ名を返す
+        function getMenuCategoryLabel(button) {
+            if (button.dataset.campaign) {
+                return '夏割';
+            }
+            const section = button.closest('.menu-section');
+            return (section && CATEGORY_LABELS[section.id]) || 'メニュー';
+        }
 
-            // 選択されたオプションを取得
-            const updatedSelectedButtons = document.querySelectorAll('.symptoms button.active');
+        // ボタン直後の施術詳細カードを削除する
+        function removeTreatmentDetail(button) {
+            const next = button.nextElementSibling;
+            if (next && next.classList.contains('inline-treatment-text')) {
+                next.remove();
+            }
+        }
 
-            if (updatedSelectedButtons.length === 0) {
-                // すべてのボタンの選択が解除された場合、メニュー時間を0にリセット
-                selectedMenuTime = 0;
-                selectedSymptom = null; // 選択されたメニューをリセット
-
-                menuPrice = 0; // メニュー価格をリセット
-            } else {
-                // 1つだけ選択状態にする
-                if (updatedSelectedButtons.length > 1) {
-                    updatedSelectedButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active'); // クリックしたボタンだけを選択
-                }
-
-                // 選択されたメニューの時間を取得して保存
-                const selectedMenu = getMenuName(button);
-                selectedMenuTime = menuTimes[selectedMenu] || 0; // メニュー時間を取得して保存
-                selectedSymptom = [selectedMenu]; // 選択されたメニュー名を配列として保存
-                menuPrice = parseInt(button.getAttribute('data-price'), 10) || 0;  // メニューの価格を取得
+        // 選択中メニューのナビゲーション（チップ表示・件数バッジ）を描画する
+        function renderMenuNav(activeButtons) {
+            const list = document.getElementById('menuNavList');
+            const count = document.getElementById('menuNavCount');
+            if (!list || !count) {
+                return;
             }
 
-            // 夏割キャンペーンのメニューが選ばれているかを反映
-            const activeCampaign = document.querySelector('.summer-menus button.active');
-            couponSelection = activeCampaign ? `夏割キャンペーン（${activeCampaign.dataset.name}）` : '';
+            count.textContent = `${activeButtons.length} / ${MAX_MENU_SELECTION}`;
+            count.classList.toggle('full', activeButtons.length >= MAX_MENU_SELECTION);
 
-            console.log('選択されたメニューの時間:', selectedMenuTime);
+            list.innerHTML = '';
+            if (activeButtons.length === 0) {
+                const empty = document.createElement('span');
+                empty.className = 'menu-nav-empty';
+                empty.textContent = 'まだメニューが選択されていません';
+                list.appendChild(empty);
+            } else {
+                activeButtons.forEach(btn => {
+                    const chip = document.createElement('span');
+                    chip.className = 'menu-chip' + (btn.dataset.campaign ? ' campaign' : '');
+
+                    const cat = document.createElement('span');
+                    cat.className = 'menu-chip-cat';
+                    cat.textContent = getMenuCategoryLabel(btn);
+                    chip.appendChild(cat);
+
+                    const name = document.createElement('span');
+                    name.className = 'menu-chip-name';
+                    name.textContent = getMenuName(btn);
+                    chip.appendChild(name);
+
+                    const remove = document.createElement('button');
+                    remove.type = 'button';
+                    remove.className = 'menu-chip-x';
+                    remove.textContent = '×';
+                    remove.setAttribute('aria-label', `${getMenuName(btn)}の選択を解除`);
+                    remove.addEventListener('click', () => {
+                        btn.classList.remove('active');
+                        removeTreatmentDetail(btn);
+                        refreshMenuSelection();
+                    });
+                    chip.appendChild(remove);
+
+                    list.appendChild(chip);
+                });
+            }
+
+            // カテゴリボタンに、そのカテゴリで選択中の件数を表示する
+            document.querySelectorAll('.menu-sections button').forEach(catBtn => {
+                const onclickAttr = catBtn.getAttribute('onclick') || '';
+                const matched = onclickAttr.match(/showMenu\('([^']+)'\)/);
+                let badge = catBtn.querySelector('.cat-count');
+                if (!badge) {
+                    badge = document.createElement('span');
+                    badge.className = 'cat-count';
+                    catBtn.appendChild(badge);
+                }
+                if (!matched) {
+                    badge.classList.remove('on');
+                    return;
+                }
+                const num = activeButtons.filter(btn => {
+                    const section = btn.closest('.menu-section');
+                    return section && section.id === matched[1];
+                }).length;
+                badge.textContent = num;
+                badge.classList.toggle('on', num > 0);
+            });
+        }
+
+        // 選択中メニューをもとに、金額・所要時間・表示をまとめて更新する
+        function refreshMenuSelection() {
+            const activeButtons = getActiveMenuButtons();
+
+            selectedSymptom = activeButtons.map(btn => getMenuName(btn));
+            selectedMenuTime = activeButtons.reduce((total, btn) => total + (menuTimes[getMenuName(btn)] || 0), 0);
+            menuPrice = activeButtons.reduce((total, btn) => total + (parseInt(btn.getAttribute('data-price'), 10) || 0), 0);
+
+            // 夏割キャンペーンのメニューが選ばれているかを反映
+            const activeCampaigns = activeButtons.filter(btn => btn.dataset.campaign);
+            couponSelection = activeCampaigns.length > 0
+                ? `夏割キャンペーン（${activeCampaigns.map(btn => btn.dataset.name).join('、')}）`
+                : '';
+
+            console.log('選択されたメニューの合計時間:', selectedMenuTime);
+
+            // 選択中メニューのナビゲーションを更新
+            renderMenuNav(activeButtons);
+
+            // メニューが1つ以上選ばれていればカレンダーを表示
+            document.querySelector('.calendar-container').style.display = activeButtons.length > 0 ? 'block' : 'none';
 
             // カレンダーを更新するために取得する日付を渡す
             fetchAvailability(currentDate);
 
-            // 既存の全inline-treatment-textを削除
-            document.querySelectorAll('.inline-treatment-text').forEach(el => el.remove());
+            // 表示を更新
+            updateDisplayInfo();
+        }
 
-            // ボタンが選択状態の場合のみ、直後にdivを挿入
-            if (!button.classList.contains('active')) {
-                // 選択解除時は何もしない
-                updateDisplayInfo();
+        function selectSymptom(button, treatmentId) {
+            // 選択された日時をリセット
+            selectedFullDate = '';
+
+            const wasActive = button.classList.contains('active');
+
+            if (wasActive) {
+                // 選択解除：ボタンと、その直後の施術詳細カードを閉じる
+                button.classList.remove('active');
+                removeTreatmentDetail(button);
+                refreshMenuSelection();
                 return;
             }
 
-            // 夏割キャンペーンのメニューは詳細カードを出さず、希望日時までスクロールする
+            // 新たに選択する場合は、最大選択数を超えないかを確認する
+            if (getActiveMenuButtons().length >= MAX_MENU_SELECTION) {
+                alert(`メニューは最大${MAX_MENU_SELECTION}つまで選択できます。\n他のメニューの選択を解除してからお選びください。`);
+                return;
+            }
+
+            button.classList.add('active');
+
+            // 集計・ナビゲーション・カレンダーを更新
+            refreshMenuSelection();
+
+            // 夏割キャンペーンのメニューは詳細カードを出さない
+            // （そのメニューだけを選んでいる場合は希望日時までスクロールする）
             if (button.dataset.campaign) {
-                updateDisplayInfo();
-                setTimeout(() => {
-                    document.getElementById('dateSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 150);
+                if (getActiveMenuButtons().length === 1) {
+                    setTimeout(() => {
+                        document.getElementById('dateSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 150);
+                }
                 return;
             }
 
@@ -1686,14 +1939,6 @@ if (treatmentId === 'treatment1') {
             } else {
                 if (treatmentText) treatmentText.innerHTML = '';
             }
-
-            // 選択されたメニューの名前と価格を取得
-            const symptomName = getMenuName(button);  // ボタンのテキストを取得
-            selectedSymptom = [symptomName];  // 選択されたメニュー名を配列として保存
-            menuPrice = parseInt(button.getAttribute('data-price'), 10) || 0;  // メニューの価格を取得
-
-            // 表示を更新
-            updateDisplayInfo();
         }
 
         function selectirradiations(button) {
@@ -1757,44 +2002,18 @@ if (treatmentId === 'treatment1') {
         }
 
         function showMenu(menu) {
-            // すべてのメニューボタンの選択状態をリセット
+            // カテゴリタブの表示状態だけを切り替える
+            // （カテゴリをまたいで複数メニューを選べるよう、選択内容はリセットしない）
             document.querySelectorAll('.menu-sections button').forEach(button => {
-                button.classList.remove('active');
+                button.classList.toggle('active', button.getAttribute('onclick') === `showMenu('${menu}')`);
             });
 
-            // 選択されたメニューセクションを表示
             document.querySelectorAll('.menu-section').forEach(section => {
-                section.classList.remove('active');
-                section.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+                section.classList.toggle('active', section.id === menu);
             });
 
-            // 対応するメニューボタンを選択状態にする
-            document.querySelectorAll('.menu-sections button').forEach(button => {
-                if (button.getAttribute('onclick') === `showMenu('${menu}')`) {
-                    button.classList.add('active');
-                }
-            });
-
-            // 選択されたメニューセクションを表示
-            document.getElementById(menu).classList.add('active');
-
-            // 夏割キャンペーンの選択と施術詳細もリセット
-            document.querySelectorAll('.summer-menus button').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.inline-treatment-text').forEach(el => el.remove());
-            document.querySelector('.calendar-container').style.display = 'none';
-
-            // メニューとオプションをリセット
-            selectedSymptom = '';      // メニューのリセット
-            irradiationsCount = '';    // オプションのリセット
-            menuPrice = 0;             // メニューの価格リセット
-            optionsPrice = 0;          // オプションの価格リセット
-            totalAmount = 0;           // 合計金額リセット
-            couponSelection = '';      // 夏割キャンペーンのリセット
-            selectedMenuTime = 0;      // 所要時間リセット
-            selectedFullDate = '';     // 希望日時リセット
-
-            // 表示を更新
-            updateDisplayInfo();
+            // 選択中メニューの集計と表示を更新
+            refreshMenuSelection();
         }
 
         function selectDate(cell) {
@@ -1827,7 +2046,7 @@ if (treatmentId === 'treatment1') {
                 name: document.getElementById('name').value.trim(),
                 phone: document.getElementById('phone').value.trim(),
                 visitCount: visitCount,
-                selectedSymptom: selectedSymptom && selectedSymptom.length > 0 ? selectedSymptom : null, // 空の選択肢をチェック
+                selectedSymptom: Array.isArray(selectedSymptom) && selectedSymptom.length > 0 ? selectedSymptom : null, // 空の選択肢をチェック
                 irradiationsCount: irradiationsCount,
                 dates: selectedFullDate ? [selectedFullDate] : null, // 空チェック
                 message: document.getElementById('message').value.trim()
@@ -1843,10 +2062,15 @@ if (treatmentId === 'treatment1') {
                 return;
             }
 
+            // 選択されたメニューとオプションをカンマ区切りにまとめる（複数選択対応）
+            const menuLine = formData.selectedSymptom
+                .concat(formData.irradiationsCount ? formData.irradiationsCount.split(', ') : [])
+                .join(',');
+
             // LINEトークにメッセージを送信
             liff.sendMessages([{
                 type: 'text',
-                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\n夏割キャンペーン：${couponSelection || 'なし'}\nメニュー：${formData.selectedSymptom},${formData.irradiationsCount}\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
+                text: `【予約フォーム】\nお名前：${formData.name}\n電話番号：${formData.phone}\nご来店回数：${formData.visitCount}\n夏割キャンペーン：${couponSelection || 'なし'}\nメニュー：${menuLine}\n希望日時：\n ${formData.dates[0]}\nメッセージ：${formData.message}`
             }]).then(() => {
                 /* メッセージ送信成功時の処理 */
                 alert('当日キャンセルは無いようにお願いいたします。');
