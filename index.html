@@ -762,9 +762,15 @@
             .summer-menu-name { font-size: 13px; }
         }
 
-        @media (max-width: 360px) {
-            .summer-menu-name { font-size: 12px; }
+        /* 狭い端末でもキャンペーンのメニュー名を1行に収める */
+        @media (max-width: 389px) {
+            .summer-menu-name { font-size: 12px; letter-spacing: -0.02em; }
             .summer-menu-price { font-size: 11px; }
+        }
+
+        @media (max-width: 339px) {
+            .summer-menus button { padding-left: 10px; padding-right: 10px; }
+            .summer-menu-name { font-size: 10.5px; letter-spacing: -0.03em; }
         }
 
         /* ===== カレンダー ===== */
@@ -1129,7 +1135,7 @@
             <div class="symptoms summer-menus">
                 <button type="button" data-campaign="1" data-name="まゆ毛WAX＋パリジャンブロウ(眉毛パーマ)" data-price="5000"
                     onclick="selectSymptom(this, 'summer1')">
-                    <span class="summer-menu-name">① まゆ毛WAX＋パリジャンブロウ<br>(眉毛パーマ)</span>
+                    <span class="summer-menu-name">① まゆ毛WAX＋パリジャンブロウ(眉毛パーマ)</span>
                     <span class="summer-menu-time">所要時間：90分</span>
                     <span class="summer-menu-price">
                         <span class="price-before">通常 5,500円</span><span class="price-arrow">▶</span><span class="price-after">5,000円</span>
@@ -1138,7 +1144,7 @@
                 </button>
                 <button type="button" data-campaign="1" data-name="まゆ毛WAX＋ラッシュリフト(まつ毛パーマ)" data-price="8000"
                     onclick="selectSymptom(this, 'summer2')">
-                    <span class="summer-menu-name">② まゆ毛WAX＋ラッシュリフト<br>(まつ毛パーマ)</span>
+                    <span class="summer-menu-name">② まゆ毛WAX＋ラッシュリフト(まつ毛パーマ)</span>
                     <span class="summer-menu-time">所要時間：120分</span>
                     <span class="summer-menu-price">
                         <span class="price-before">通常 9,350円</span><span class="price-arrow">▶</span><span class="price-after">8,000円</span>
